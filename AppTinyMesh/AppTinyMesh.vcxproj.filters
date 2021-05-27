@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\qtemainwindow.cpp">
+      <Filter>Source\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\moc_qte.cpp">
+      <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\evector.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\box.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\shader-api.cpp">
+      <Filter>Source\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ray.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\camera.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\mesh-widget.cpp">
+      <Filter>Source\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\mesh.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\meshcolor.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\triangle.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\realtime-moc.cpp">
+      <Filter>Interface</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Include\qte.h">
+      <Filter>Include</Filter>
+    </CustomBuild>
+    <CustomBuild Include="UI\interface.ui">
+      <Filter>Interface</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Include\realtime.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Include">
+      <UniqueIdentifier>{9c53d45d-bc4a-46c0-ab3b-31ea552e8d5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{8461124c-2789-4807-a62f-6aa5707e7e58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Window">
+      <UniqueIdentifier>{129e765c-0802-4e5d-b71c-6e2908ca26bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{6f4ea5e2-9935-4bab-87f6-9f9dfd7e9926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core">
+      <UniqueIdentifier>{fe0f8b8c-8743-4831-b877-5b1497a72f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Render">
+      <UniqueIdentifier>{594b030a-3cac-4cf3-8289-6e3daf5dbc56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{8b50c486-7a12-4404-bb16-16855aee3d6d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\evector.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\box.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\shader-api.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ray.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\camera.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\mesh.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\meshcolor.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\color.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\mathematics.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\mesh.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\skybox.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
