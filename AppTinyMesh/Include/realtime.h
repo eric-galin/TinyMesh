@@ -154,19 +154,19 @@ public:
   void DisableMesh(const QString&);
 
   Ray ComputeRay(const QPoint&) const;
-  void SetCamera(const Camera& cam);
-  Camera GetCamera() const;
+  void SetCamera(const Camera&);
+
   void SetCameraMode(bool);
   void SetNearAndFarPlane(double, double);
   void SaveScreen(int = 1280, int = 1280);
   QPoint GetMousePosition() const;
 
-  void SetMaterial(const QString& name, MeshMaterial mat);
-  void SetMaterialGlobal(MeshMaterial mat);
-  void UseWireframe(const QString& name, bool wireframe);
-  void UseWireframeGlobal(bool wireframe);
-  void SetShading(const QString& name, MeshShading shading);
-  void SetShadingGlobal(MeshShading shading);
+  void SetMaterial(const QString&, MeshMaterial);
+  void SetMaterialGlobal(MeshMaterial);
+  void UseWireframe(const QString&, bool);
+  void UseWireframeGlobal(bool);
+  void SetShading(const QString&, MeshShading);
+  void SetShadingGlobal(MeshShading);
 
 protected:
   virtual void initializeGL();

@@ -45,7 +45,7 @@ void MainWindow::editingSceneRight(const Ray&)
 
 void MainWindow::BoxMeshExample()
 {
-	meshColor = MeshColor(Mesh(Box(Vector(0), 1)));
+	meshColor = MeshColor(Mesh(Box(1.0)));
 	UpdateGeometry();
 }
 
@@ -54,8 +54,8 @@ void MainWindow::UpdateGeometry()
 	meshWidget->ClearAll();
 	meshWidget->AddMesh("BoxMesh", meshColor);
 
-	uiw.lineEdit->setText(QString::number(meshColor.GetVertices().size()));
-	uiw.lineEdit_2->setText(QString::number(meshColor.VertexIndexes().size()));
+	uiw.lineEdit->setText(QString::number(meshColor.Vertexes()));
+	uiw.lineEdit_2->setText(QString::number(meshColor.Triangles()));
 
 	UpdateMaterial();
 }

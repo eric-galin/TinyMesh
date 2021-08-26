@@ -90,19 +90,6 @@ void Mesh::SmoothNormals()
 }
 
 /*!
-\brief Check if the i<sup>th</sup> triangle in the mesh is a flat or smooth triangle.
-
-This is performed by comparing the indexes of the normals, not the normals themselves.
-Therefore, should the normal indexes be different but the normal vector equal, the
-function will return that the triangle is a smooth one anyway.
-\param i Index of the triangle.
-*/
-int Mesh::IsSmooth(int i) const
-{
-  return !((narray[i * 3] == narray[i * 3 + 1]) && (narray[i * 3] == narray[i * 3 + 2]));
-}
-
-/*!
 \brief Add a smooth triangle to the geometry.
 \param a, b, c Index of the vertices.
 \param na, nb, nc Index of the normals.
@@ -192,7 +179,7 @@ bool Mesh::Inside(const Vector& p) const
     double t;
     double u, v;
     // Edge
-    if (GetTriangle(i).Intersect(ray, t,u,v))
+    if (GetTriangle(i).Intersect(ray, t, u, v))
     {
       if (t >= 0.0) check = !check;
     }

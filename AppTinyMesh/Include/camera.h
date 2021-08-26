@@ -42,9 +42,7 @@ public:
 
   void Step(double);
 
-  void LeftRight(double);
   void Vertical();
-  void UpDown(double);
 
   void BackForth(double, bool = false);
   void LeftRightRound(double);

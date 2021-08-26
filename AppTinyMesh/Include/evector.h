@@ -452,7 +452,6 @@ inline double Vector::Slope(const Vector& a, const Vector& b)
 \brief Compute the point on a segment such that the linear function satisfies f(a)=va and f(b)=vb.
 
 This function can be used as a first approximation for computing the intersection between a segment and an implicit surface.
-\image html intersection.png
 
 \sa Linear::Solve(double a, double b, const Vector&, const Vector&);
 */

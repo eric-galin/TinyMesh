@@ -11,8 +11,6 @@ The class stores the opposite two corners as vectors.
 The center and the radius (diagonal vector) are computed on the
 fly by inline functions.
 
-\image html box.png
-
 The vertices of a box can be obtained by the Box::Vertex()
 member function which returns one of the eight vertices of the box.
 The two opposite corners can be obtained faster as follows:
@@ -127,18 +125,6 @@ Box::Box(const Box& x, const Box& y)
 }
 
 /*!
-\brief Computes the intersection between two boxes.
-
-Note that if the intersection is empty, the resulting box is invalid.
-
-\param x Argument box.
-*/
-Box Box::Intersection(const Box& x) const
-{
-  return Box(Vector::Max(a, x.a), Vector::Min(b, x.b));
-}
-
-/*!
 \brief Creates a parallelepipedic box whose dimensions are integer
 multiples of a given input reference size.
 
@@ -168,18 +154,6 @@ void Box::SetParallelepipedic(double size, int& x, int& y, int& z)
   Vector e = Vector(x, y, z) * size / 2.0;
   a = c - e;
   b = c + e;
-}
-
-/*!
-\brief Extend the limits of the box by a given distance.
-
-Note that this is the same as performing the Minkowski sum with a cubic box of size r.
-\param r Range.
-*/
-void Box::Extend(double r)
-{
-  a -= Vector(r);
-  b += Vector(r);
 }
 
 /*!

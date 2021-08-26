@@ -19,8 +19,6 @@ Camera::Camera() :Camera(Vector::Null, Vector::Y, Vector::Z, 1.0, 1.0, 1.0, 1000
 
 If no upward vector is provided, it is internally defined as z-axis.
 
-\image html camera.png
-
 The view vector is defined as the vector between the eye point and the look at point.
 The right vector, which is always computed as a cross product between the view vector and the up vector.
 \param eye Eye point.
@@ -92,24 +90,6 @@ std::ostream& operator<<(std::ostream& s, const Camera& camera)
 }
 
 /*!
-\brief Rotates the camera around the up vector by a given angle.
-\param a Rotation angle.
-*/
-void Camera::LeftRight(double a)
-{
-  Vector z = at - eye;
-  double length = Norm(z);
-  z /= length;
-  Vector left = up / z;
-  left /= Norm(left);
-
-  // Rotate
-  z = z * cos(a) + left * sin(a);
-
-  at = eye + z * length;
-}
-
-/*!
 \brief Reset the camera so that the up vector should point to the sky.
 */
 void Camera::Vertical()
@@ -122,27 +102,6 @@ void Camera::Vertical()
   Vector left = up / z;
   z = left / up;
   z /= Norm(z);
-
-  at = eye + z * length;
-}
-
-/*!
-\brief Move camera up and down according to the up vector.
-\param a Rotation angle.
-*/
-void Camera::UpDown(double a)
-{
-  Vector z = at - eye;
-  double length = Norm(z);
-  z /= length;
-  Vector left = up / z;
-  left /= Norm(left);
-
-  // Rotate
-  z = z * cos(a) + up * sin(a);
-
-  // Update up vector
-  up = z / left;
 
   at = eye + z * length;
 }

@@ -1,7 +1,6 @@
 // Box
 
-#ifndef __Box__
-#define __Box__
+#pragma once
 
 #include <QtCore/QVector>
 
@@ -47,14 +46,10 @@ public:
   bool Inside(const Box&) const;
   bool Inside(const Vector&) const;
 
-  // Boolean
-  Box Intersection(const Box&) const;
-  bool Empty() const;
   double Volume() const;
   double Area() const;
 
   // Extend box to cube
-  void Extend(double);
   Box Extended(double) const;
   void Extend(const Vector&);
 
@@ -206,20 +201,6 @@ inline Vector Box::Normal(const Vector& p) const
 }
 
 /*!
-\brief Check if a box is empty.
-
-The box is empty if one of the coordinates of its lower point is
-greater than the coordinates of the opposite point.
-*/
-inline bool Box::Empty() const
-{
-  if ((a[0] > b[0]) || (a[1] > b[1]) || (a[2] > b[2]))
-    return true;
-  else
-    return false;
-}
-
-/*!
 \brief Check if an argument box is inside the box.
 \param box The box.
 */
@@ -254,5 +235,3 @@ inline int operator!=(const Box& a, const Box& b)
 {
   return !(a == b);
 }
-
-#endif

@@ -20,13 +20,6 @@ public:
 
 	Vector operator()(double) const;
 
-	double Length() const;
-	double LengthSquared() const;
-
-	// Ray transformations
-	Ray Scaled(const Vector&) const;
-	Ray Translated(const Vector&) const;
-
 	// Functions to access Vector class components
 	Vector Origin() const;
 	Vector Direction() const;
@@ -75,19 +68,4 @@ inline Vector Ray::operator()(double t) const
 	return c + t * n;
 }
 
-/*!
-\brief Gets the length of the direction vector.
-*/
-inline double Ray::Length() const
-{
-	return Norm(n);
-}
-
-/*!
-\brief Gets the squared length of the direction vector.
-*/
-inline double Ray::LengthSquared() const
-{
-	return n * n;
-}
 #endif

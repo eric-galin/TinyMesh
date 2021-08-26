@@ -24,29 +24,6 @@ Ray Ray::Reflect(const Vector& p, const Vector& normal)
 }
 
 /*!
-\brief Scale the ray.
-
-This function changes both the direction vector and origin.
-Note that the direction is kept unit.
-
-\param s Scaling vector.
-*/
-Ray Ray::Scaled(const Vector& s) const
-{
-  return Ray(c.Scaled(s), Normalized(n.Scaled(s)));
-}
-
-/*!
-\brief Translate the ray.
-
-\param t Translation vector.
-*/
-Ray Ray::Translated(const Vector& t) const
-{
-  return Ray(c + t, n);
-}
-
-/*!
 \brief Overloaded.
 
 \param s Stream.
