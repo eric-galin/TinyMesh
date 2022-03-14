@@ -6,6 +6,8 @@
 \brief Core triangle mesh class.
 */
 
+#include <QtCore/QRegularExpression>
+
 /*!
 \brief Initialize the mesh to empty.
 */
@@ -257,44 +259,34 @@ void Mesh::Load(const QString& filename)
   QTextStream in(&data);
 
   // Set of regular expressions : Vertex, Normal, Triangle
-  QRegExp rexv("v\\s*([-|+|\\s]\\d*\\.\\d+)\\s*([-|+|\\s]\\d*\\.\\d+)\\s*([-|+|\\s]\\d*\\.\\d+)");
-  QRegExp rexn("vn\\s*([-|+|\\s]\\d*\\.\\d+)\\s*([-|+|\\s]\\d*\\.\\d+)\\s*([-|+|\\s]\\d*\\.\\d+)");
-  QRegExp rext("f\\s*(\\d*)/\\d*/(\\d*)\\s*(\\d*)/\\d*/(\\d*)\\s*(\\d*)/\\d*/(\\d*)");
+  QRegularExpression rexv("v\\s*([-|+|\\s]\\d*\\.\\d+)\\s*([-|+|\\s]\\d*\\.\\d+)\\s*([-|+|\\s]\\d*\\.\\d+)");
+  QRegularExpression rexn("vn\\s*([-|+|\\s]\\d*\\.\\d+)\\s*([-|+|\\s]\\d*\\.\\d+)\\s*([-|+|\\s]\\d*\\.\\d+)");
+  QRegularExpression rext("f\\s*(\\d*)/\\d*/(\\d*)\\s*(\\d*)/\\d*/(\\d*)\\s*(\\d*)/\\d*/(\\d*)");
   while (!in.atEnd())
   {
     QString line = in.readLine();
-    if (rexv.indexIn(line, 0) > -1)
+    QRegularExpressionMatch match = rexv.match(line);
+    QRegularExpressionMatch matchN = rexn.match(line);
+    QRegularExpressionMatch matchT = rext.match(line);
+    if (match.hasMatch())//rexv.indexIn(line, 0) > -1)
     {
-      Vector q = Vector(rexv.cap(1).toDouble(), rexv.cap(2).toDouble(), rexv.cap(3).toDouble()); vertices.append(q);
+      Vector q = Vector(match.captured(1).toDouble(), match.captured(2).toDouble(), match.captured(3).toDouble()); vertices.append(q);
     }
-    else if (rexn.indexIn(line, 0) > -1)
+    else if (matchN.hasMatch())//rexn.indexIn(line, 0) > -1)
     {
-      Vector q = Vector(rexn.cap(1).toDouble(), rexn.cap(2).toDouble(), rexn.cap(3).toDouble());  normals.append(q);
+      Vector q = Vector(matchN.captured(1).toDouble(), matchN.captured(2).toDouble(), matchN.captured(3).toDouble());  normals.append(q);
     }
-    else if (rext.indexIn(line, 0) > -1)
+    else if (matchT.hasMatch())//rext.indexIn(line, 0) > -1)
     {
-      varray.append(rext.cap(1).toInt() - 1);
-      varray.append(rext.cap(3).toInt() - 1);
-      varray.append(rext.cap(5).toInt() - 1);
-      narray.append(rext.cap(2).toInt() - 1);
-      narray.append(rext.cap(4).toInt() - 1);
-      narray.append(rext.cap(6).toInt() - 1);
+      varray.append(matchT.captured(1).toInt() - 1);
+      varray.append(matchT.captured(3).toInt() - 1);
+      varray.append(matchT.captured(5).toInt() - 1);
+      narray.append(matchT.captured(2).toInt() - 1);
+      narray.append(matchT.captured(4).toInt() - 1);
+      narray.append(matchT.captured(6).toInt() - 1);
     }
   }
   data.close();
-}
-
-/*!
-\brief Translate the mesh.
-\param t Translation vector.
-*/
-void Mesh::Translate(const Vector& t)
-{
-  // Vertexes
-  for (int i = 0; i < vertices.size(); i++)
-  {
-    vertices[i] += t;
-  }
 }
 
 /*!
@@ -330,7 +322,7 @@ void Mesh::SaveObj(const QString& url, const QString& meshName) const
   if (!data.open(QFile::WriteOnly))
     return;
   QTextStream out(&data);
-  out << "g " << meshName << endl;
+  out << "g " << meshName << Qt::endl;
   for (int i = 0; i < vertices.size(); i++)
     out << "v " << vertices.at(i)[0] << " " << vertices.at(i)[1] << " " << vertices.at(i)[2] << QString('\n');
   for (int i = 0; i < normals.size(); i++)

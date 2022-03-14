@@ -261,49 +261,6 @@ Ray Camera::PixelToRay(int px, int py, int w, int h) const
 }
 
 /*!
-\brief Compute the equation of a ray given a pixel in the camera plane.
-
-\sa Camera::PixelToRay(int, int, int, int) const
-
-\param px,py Pixel coordinates.
-\param w,h Size of the viewing window.
-\param a Anti-aliasing sub-pixels.
-\param xa,ya Integer coordinates of the sub-pixel.
-*/
-Ray Camera::PixelToRay(int px, int py, int w, int h, int a, int xa, int ya) const
-{
-  // Get coordinates
-  Vector view = Normalized(At() - Eye());
-  Vector horizontal = Normalized(view / Up());
-  Vector vertical = Normalized(horizontal / view);
-
-  double length = 1.0;
-
-  // Convert to radians 
-  double rad = GetAngleOfViewV(w, h);  // fov
-
-  double vLength = tan(rad / 2.0) * length;
-  double hLength = vLength * (double(w) / double(h));
-
-  vertical *= vLength;
-  horizontal *= hLength;
-
-  // Translate mouse coordinates so that the origin lies in the center of the view port
-  double x = px - w / 2.0;
-  double y = h / 2.0 - py;
-
-  x += double(xa) / double(a) - 0.5;
-  y += double(ya) / double(a) - 0.5;
-
-  // Scale mouse coordinates so that half the view port width and height becomes 1.0
-  x /= w / 2.0;
-  y /= h / 2.0;
-
-  // Direction is a linear combination to compute intersection of picking ray with view port plane
-  return Ray(eye, Normalized(view * length + horizontal * x + vertical * y));
-}
-
-/*!
 \brief Compute coordinates of a point in the camera plane.
 \param p Point.
 \param u, v Coordinates in the screen

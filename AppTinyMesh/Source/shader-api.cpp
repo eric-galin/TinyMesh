@@ -136,7 +136,7 @@ GLuint compile_shader(const GLuint program, const GLenum shader_type, const std:
   glAttachShader(program, shader);
 
   const char* sources = source.c_str();
-  glShaderSource(shader, 1, &sources, NULL);
+  glShaderSource(shader, 1, &sources, nullptr);
   glCompileShader(shader);
 
   GLint status;
@@ -156,7 +156,7 @@ int reload_program(GLuint program, const char* filename, const char* definitions
   if (shaders_max > 0)
   {
     std::vector<GLuint> shaders(shaders_max, 0);
-    glGetAttachedShaders(program, shaders_max, NULL, &shaders.front());
+    glGetAttachedShaders(program, shaders_max, nullptr, &shaders.front());
     for (int i = 0; i < shaders_max; i++)
     {
       glDetachShader(program, shaders[i]);
@@ -219,7 +219,7 @@ int release_program(const GLuint program)
   if (shaders_max > 0)
   {
     std::vector<GLuint> shaders(shaders_max, 0);
-    glGetAttachedShaders(program, shaders_max, NULL, &shaders.front());
+    glGetAttachedShaders(program, shaders_max, nullptr, &shaders.front());
     for (int i = 0; i < shaders_max; i++)
     {
       glDetachShader(program, shaders[i]);
@@ -341,7 +341,7 @@ int program_format_errors(const GLuint program, std::string& errors)
   }
 
   std::vector<GLuint> shaders(shaders_max, 0);
-  glGetAttachedShaders(program, shaders_max, NULL, &shaders.front());
+  glGetAttachedShaders(program, shaders_max, nullptr, &shaders.front());
   for (int i = 0; i < shaders_max; i++)
   {
     GLint value;
@@ -351,12 +351,12 @@ int program_format_errors(const GLuint program, std::string& errors)
       // recupere les erreurs de compilation des shaders
       glGetShaderiv(shaders[i], GL_INFO_LOG_LENGTH, &value);
       std::vector<char>log(value + 1, 0);
-      glGetShaderInfoLog(shaders[i], (GLsizei)log.size(), NULL, &log.front());
+      glGetShaderInfoLog(shaders[i], (GLsizei)log.size(), nullptr, &log.front());
 
       // recupere le source
       glGetShaderiv(shaders[i], GL_SHADER_SOURCE_LENGTH, &value);
       std::vector<char> source(value + 1, 0);
-      glGetShaderSource(shaders[i], (GLsizei)source.size(), NULL, &source.front());
+      glGetShaderSource(shaders[i], (GLsizei)source.size(), nullptr, &source.front());
 
       glGetShaderiv(shaders[i], GL_SHADER_TYPE, &value);
       errors.append("[error] compiling ").append(shader_string(value)).append("...\n");
@@ -373,7 +373,7 @@ int program_format_errors(const GLuint program, std::string& errors)
     glGetProgramiv(program, GL_INFO_LOG_LENGTH, &value);
 
     std::vector<char>log(value + 1, 0);
-    glGetProgramInfoLog(program, (GLsizei)log.size(), NULL, &log.front());
+    glGetProgramInfoLog(program, (GLsizei)log.size(), nullptr, &log.front());
 
     errors.append("[error] linking program...\n").append(log.begin(), log.end());
   }

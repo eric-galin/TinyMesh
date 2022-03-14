@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#include "evector.h"
+#include "mathematics.h"
 
 class Box
 {
@@ -53,12 +53,8 @@ public:
   Box Extended(double) const;
   void Extend(const Vector&);
 
-  void SetParallelepipedic(double, int&, int&, int&);
   // Compute sub-box
   Box Sub(int) const;
-
-  // Classification
-  int Octant(const Vector&) const;
 
   // Translation, scale
   void Translate(const Vector&);

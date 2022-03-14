@@ -1,30 +1,30 @@
 #ifndef __Ray__
 #define __Ray__
 
-#include "evector.h"
+#include "mathematics.h"
 
 // Ray class
 class Ray
 {
 protected:
-	Vector c; //!< Origin of the ray.
-	Vector n; //!< Direction.
+  Vector c; //!< Origin of the ray.
+  Vector n; //!< Direction.
 public:
-	//! Empty.
-	Ray() {}
-	explicit Ray(const Vector&, const Vector&);
-	//! Empty.
-	~Ray() {}
+  //! Empty.
+  Ray() {}
+  explicit Ray(const Vector&, const Vector&);
+  //! Empty.
+  ~Ray() {}
 
-	Ray Reflect(const Vector&, const Vector&);
+  Ray Reflect(const Vector&, const Vector&);
 
-	Vector operator()(double) const;
+  Vector operator()(double) const;
 
-	// Functions to access Vector class components
-	Vector Origin() const;
-	Vector Direction() const;
+  // Functions to access Vector class components
+  Vector Origin() const;
+  Vector Direction() const;
 
-	friend std::ostream& operator<<(std::ostream&, const Ray&);
+  friend std::ostream& operator<<(std::ostream&, const Ray&);
 };
 
 /*!
@@ -39,8 +39,8 @@ Ray ray(Vector(0.0,0.0,0.0),Normalized(Vector(2.0,-1.0,3.0)));
 */
 inline Ray::Ray(const Vector& p, const Vector& d)
 {
-	c = p;
-	n = d;
+  c = p;
+  n = d;
 }
 
 /*!
@@ -48,7 +48,7 @@ inline Ray::Ray(const Vector& p, const Vector& d)
 */
 inline Vector Ray::Origin() const
 {
-	return c;
+  return c;
 }
 
 /*!
@@ -56,7 +56,7 @@ inline Vector Ray::Origin() const
 */
 inline Vector Ray::Direction() const
 {
-	return n;
+  return n;
 }
 
 /*!
@@ -65,7 +65,7 @@ inline Vector Ray::Direction() const
 */
 inline Vector Ray::operator()(double t) const
 {
-	return c + t * n;
+  return c + t * n;
 }
 
 #endif

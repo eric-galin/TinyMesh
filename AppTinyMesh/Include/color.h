@@ -35,7 +35,6 @@ public:
   friend Color operator/(const Color&, double);
 
   static Color Lerp(double, const Color&, const Color&);
-  double Luminance() const;
 
   double& operator[] (int);
   double operator[] (int) const;
@@ -209,12 +208,5 @@ inline QColor Color::GetQt() const
   return QColor(int(255.0 * Math::Clamp(c[0])), int(255.0 * Math::Clamp(c[1])), int(255.0 * Math::Clamp(c[2])), int(255.0 * Math::Clamp(c[3])));
 }
 
-/*!
-\brief Compute the luminance.
-*/
-inline double Color::Luminance() const
-{
-  return 0.212671 * c[0] + 0.715160 * c[1] + 0.072169 * c[2];
-}
 
 #endif

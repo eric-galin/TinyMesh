@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'realtime.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.2)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.1.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,8 +12,8 @@
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'realtime.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.2. It"
+#elif Q_MOC_OUTPUT_REVISION != 68
+#error "This file was generated using the moc from 6.1.3. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -22,35 +22,32 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MeshWidget_t {
-    QByteArrayData data[19];
+    const uint offsetsAndSize[38];
     char stringdata0[280];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_MeshWidget_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(offsetof(qt_meta_stringdata_MeshWidget_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_MeshWidget_t qt_meta_stringdata_MeshWidget = {
     {
-QT_MOC_LITERAL(0, 0, 10), // "MeshWidget"
-QT_MOC_LITERAL(1, 11, 13), // "_signalUpdate"
-QT_MOC_LITERAL(2, 25, 0), // ""
-QT_MOC_LITERAL(3, 26, 20), // "_signalMouseMoveEdit"
-QT_MOC_LITERAL(4, 47, 12), // "QMouseEvent*"
-QT_MOC_LITERAL(5, 60, 16), // "_signalMouseMove"
-QT_MOC_LITERAL(6, 77, 19), // "_signalMouseRelease"
-QT_MOC_LITERAL(7, 97, 20), // "_signalEditSceneLeft"
-QT_MOC_LITERAL(8, 118, 3), // "Ray"
-QT_MOC_LITERAL(9, 122, 21), // "_signalEditSceneRight"
-QT_MOC_LITERAL(10, 144, 15), // "mousePressEvent"
-QT_MOC_LITERAL(11, 160, 17), // "mouseReleaseEvent"
-QT_MOC_LITERAL(12, 178, 21), // "mouseDoubleClickEvent"
-QT_MOC_LITERAL(13, 200, 14), // "mouseMoveEvent"
-QT_MOC_LITERAL(14, 215, 10), // "wheelEvent"
-QT_MOC_LITERAL(15, 226, 12), // "QWheelEvent*"
-QT_MOC_LITERAL(16, 239, 13), // "keyPressEvent"
-QT_MOC_LITERAL(17, 253, 10), // "QKeyEvent*"
-QT_MOC_LITERAL(18, 264, 15) // "keyReleaseEvent"
+QT_MOC_LITERAL(0, 10), // "MeshWidget"
+QT_MOC_LITERAL(11, 13), // "_signalUpdate"
+QT_MOC_LITERAL(25, 0), // ""
+QT_MOC_LITERAL(26, 20), // "_signalMouseMoveEdit"
+QT_MOC_LITERAL(47, 12), // "QMouseEvent*"
+QT_MOC_LITERAL(60, 16), // "_signalMouseMove"
+QT_MOC_LITERAL(77, 19), // "_signalMouseRelease"
+QT_MOC_LITERAL(97, 20), // "_signalEditSceneLeft"
+QT_MOC_LITERAL(118, 3), // "Ray"
+QT_MOC_LITERAL(122, 21), // "_signalEditSceneRight"
+QT_MOC_LITERAL(144, 15), // "mousePressEvent"
+QT_MOC_LITERAL(160, 17), // "mouseReleaseEvent"
+QT_MOC_LITERAL(178, 21), // "mouseDoubleClickEvent"
+QT_MOC_LITERAL(200, 14), // "mouseMoveEvent"
+QT_MOC_LITERAL(215, 10), // "wheelEvent"
+QT_MOC_LITERAL(226, 12), // "QWheelEvent*"
+QT_MOC_LITERAL(239, 13), // "keyPressEvent"
+QT_MOC_LITERAL(253, 10), // "QKeyEvent*"
+QT_MOC_LITERAL(264, 15) // "keyReleaseEvent"
 
     },
     "MeshWidget\0_signalUpdate\0\0"
@@ -67,7 +64,7 @@ QT_MOC_LITERAL(18, 264, 15) // "keyReleaseEvent"
 static const uint qt_meta_data_MeshWidget[] = {
 
  // content:
-       8,       // revision
+       9,       // revision
        0,       // classname
        0,    0, // classinfo
       13,   14, // methods
@@ -77,22 +74,22 @@ static const uint qt_meta_data_MeshWidget[] = {
        0,       // flags
        6,       // signalCount
 
- // signals: name, argc, parameters, tag, flags
-       1,    0,   79,    2, 0x06 /* Public */,
-       3,    1,   80,    2, 0x06 /* Public */,
-       5,    1,   83,    2, 0x06 /* Public */,
-       6,    0,   86,    2, 0x06 /* Public */,
-       7,    1,   87,    2, 0x06 /* Public */,
-       9,    1,   90,    2, 0x06 /* Public */,
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   92,    2, 0x06,    0 /* Public */,
+       3,    1,   93,    2, 0x06,    1 /* Public */,
+       5,    1,   96,    2, 0x06,    3 /* Public */,
+       6,    0,   99,    2, 0x06,    5 /* Public */,
+       7,    1,  100,    2, 0x06,    6 /* Public */,
+       9,    1,  103,    2, 0x06,    8 /* Public */,
 
- // slots: name, argc, parameters, tag, flags
-      10,    1,   93,    2, 0x0a /* Public */,
-      11,    1,   96,    2, 0x0a /* Public */,
-      12,    1,   99,    2, 0x0a /* Public */,
-      13,    1,  102,    2, 0x0a /* Public */,
-      14,    1,  105,    2, 0x0a /* Public */,
-      16,    1,  108,    2, 0x0a /* Public */,
-      18,    1,  111,    2, 0x0a /* Public */,
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+      10,    1,  106,    2, 0x0a,   10 /* Public */,
+      11,    1,  109,    2, 0x0a,   12 /* Public */,
+      12,    1,  112,    2, 0x0a,   14 /* Public */,
+      13,    1,  115,    2, 0x0a,   16 /* Public */,
+      14,    1,  118,    2, 0x0a,   18 /* Public */,
+      16,    1,  121,    2, 0x0a,   20 /* Public */,
+      18,    1,  124,    2, 0x0a,   22 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -118,7 +115,7 @@ void MeshWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         auto *_t = static_cast<MeshWidget *>(_o);
-        Q_UNUSED(_t)
+        (void)_t;
         switch (_id) {
         case 0: _t->_signalUpdate(); break;
         case 1: _t->_signalMouseMoveEdit((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
@@ -182,12 +179,18 @@ void MeshWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject MeshWidget::staticMetaObject = { {
-    &QOpenGLWidget::staticMetaObject,
-    qt_meta_stringdata_MeshWidget.data,
+const QMetaObject MeshWidget::staticMetaObject = { {
+    QMetaObject::SuperData::link<QOpenGLWidget::staticMetaObject>(),
+    qt_meta_stringdata_MeshWidget.offsetsAndSize,
     qt_meta_data_MeshWidget,
     qt_static_metacall,
     nullptr,
+qt_incomplete_metaTypeArray<qt_meta_stringdata_MeshWidget_t
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Ray &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Ray &, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QWheelEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QKeyEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QKeyEvent *, std::false_type>
+
+
+>,
     nullptr
 } };
 
@@ -216,7 +219,7 @@ int MeshWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 13)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
         _id -= 13;
     }
     return _id;

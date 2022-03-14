@@ -125,38 +125,6 @@ Box::Box(const Box& x, const Box& y)
 }
 
 /*!
-\brief Creates a parallelepipedic box whose dimensions are integer
-multiples of a given input reference size.
-
-\param size Reference size, the dimension of the box will be a multiple of this size.
-\param x,y,z Three integers.
-*/
-void Box::SetParallelepipedic(double size, int& x, int& y, int& z)
-{
-  // Diagonal
-  Vector d = (b - a);
-
-  // Integer sizes
-  // Bug tracking: adding 0.99 avoids keeping track of which indexes are the maxima 
-  x = int(d[0] / size + 0.99);
-  y = int(d[1] / size + 0.99);
-  z = int(d[2] / size + 0.99);
-
-  // Expand if necessary
-  if (x == 0) { x++; }
-  if (y == 0) { y++; }
-  if (z == 0) { z++; }
-
-  // Center
-  Vector c = 0.5 * (a + b);
-
-  // Diagonal
-  Vector e = Vector(x, y, z) * size / 2.0;
-  a = c - e;
-  b = c + e;
-}
-
-/*!
 \brief Extend the limits of the box by a given distance.
 
 Note that this is the same as performing the Minkowski sum with a cubic box of size r.
@@ -188,18 +156,6 @@ Box Box::Sub(int n) const
   Vector c = Center();
   return Box(Vector((n & 1) ? c[0] : a[0], (n & 2) ? c[1] : a[1], (n & 4) ? c[2] : a[2]),
     Vector((n & 1) ? b[0] : c[0], (n & 2) ? b[1] : c[1], (n & 4) ? b[2] : c[2]));
-}
-
-/*!
-\brief Compute the octant index of a vertex with respect to the box center.
-
-\sa Vector::Octant()
-\param p Point.
-*/
-int Box::Octant(const Vector& p) const
-{
-  Vector c = Center();
-  return c.Octant(p);
 }
 
 /*!

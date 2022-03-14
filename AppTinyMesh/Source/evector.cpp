@@ -1,11 +1,12 @@
 // Vector  
 
 // Self include
-#include "evector.h"
+#include "mathematics.h"
+
 #include <iostream>
 
 /*!
-\class Vector evector.h
+\class Vector mathematics.h
 \brief Vectors in three dimensions.
 
 Most binary operators have been overloaded as expected,
@@ -140,27 +141,4 @@ void Vector::Orthonormal(Vector& x, Vector& y) const
 {
   x = Normalized(Orthogonal());
   y = Normalized(*this / x);
-}
-
-/*!
-\brief Computes octant index of a vector with respect to the vector object.
-
-\sa Box::Octant(const Vector&)
-\param p %Vector.
-*/
-int Vector::Octant(const Vector& p) const
-{
-  return ((p[0] < c[0]) ? 0 : 1) | ((p[1] < c[1]) ? 0 : 2) | ((p[2] < c[2]) ? 0 : 4);
-}
-
-/*!
-\brief Trilinear interpolation between eight vectors.
-
-\sa Math::Bilinear()
-\param a,b,c,d,e,f,g,h Interpolated values.
-\param u,v,w Interpolation coefficients.
-*/
-Vector Vector::Trilinear(const Vector& a, const Vector& b, const Vector& c, const Vector& d, const Vector& e, const Vector& f, const Vector& g, const Vector& h, double u, double v, double w)
-{
-  return (1 - w) * Vector::Bilinear(a, b, c, d, u, v) + w * Vector::Bilinear(e, f, g, h, u, v);
 }

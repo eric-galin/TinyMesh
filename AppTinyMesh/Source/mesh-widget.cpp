@@ -7,8 +7,10 @@
 #include <QtWidgets/QApplication>
 #include <QtGui/QKeyEvent>
 #include <QtGui/QMouseEvent>
-#include <QtOpenGL/QGLWidget>
+#include <QtOpenGLWidgets/QOpenGLWidget>
 #include <QtCore/qdatetime.h>
+
+#include <QtGui/QPainter>
 
 /*!
 \brief Default constructor.
@@ -285,9 +287,9 @@ void MeshWidget::initializeGL()
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
   // Disable vsync for proper performance measurements
-  QGLFormat fmt;
-  fmt.setSwapInterval(0);
-  QGLFormat::setDefaultFormat(fmt);
+ // QGLFormat fmt;
+ // fmt.setSwapInterval(0);
+ // QGLFormat::setDefaultFormat(fmt);
 
   // Shader/Camera/Profiler
   QString pPath = "./";
@@ -392,7 +394,7 @@ void MeshWidget::paintGL()
 
     // Draw
     glBindVertexArray(i.value()->vao);
-    glDrawElements(GL_TRIANGLES, (GLsizei)i.value()->triangleCount, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, (GLsizei)i.value()->triangleCount, GL_UNSIGNED_INT, nullptr);
   }
   profiler.EndGPU();
 
@@ -706,8 +708,8 @@ void MeshWidget::RenderStats()
 */
 void MeshWidget::mousePressEvent(QMouseEvent* e)
 {
-  x0 = e->globalX();
-  y0 = e->globalY();
+  x0 = e->globalPosition().x();
+  y0 = e->globalPosition().y();
   if (e->modifiers() & Qt::ControlModifier)
   {
     if (e->buttons() == Qt::LeftButton)
@@ -745,8 +747,8 @@ void MeshWidget::mouseDoubleClickEvent(QMouseEvent* e)
 */
 void MeshWidget::mouseMoveEvent(QMouseEvent* e)
 {
-  int x = e->globalX();
-  int y = e->globalY();
+  int x = e->globalPosition().x();
+  int y = e->globalPosition().y();
   if ((e->modifiers() & Qt::AltModifier))
   {
     // Displacement mode 
@@ -771,8 +773,8 @@ void MeshWidget::mouseMoveEvent(QMouseEvent* e)
       QApplication::setOverrideCursor(QCursor(Qt::SizeAllCursor));
     }
 
-    x0 = e->globalX();
-    y0 = e->globalY();
+    x0 = e->globalPosition().x();
+    y0 = e->globalPosition().y();
 
     emit _signalMouseMove(e);
   }
@@ -780,8 +782,8 @@ void MeshWidget::mouseMoveEvent(QMouseEvent* e)
   {
     emit _signalMouseMoveEdit(e);
 
-    x0 = e->globalX();
-    y0 = e->globalY();
+    x0 = e->globalPosition().x();
+    y0 = e->globalPosition().y();
   }
 }
 
@@ -794,7 +796,7 @@ void MeshWidget::wheelEvent(QWheelEvent* e)
   if (!(e->modifiers() & Qt::ControlModifier) && !(e->modifiers() & Qt::ShiftModifier))
   {
     double MoveScale = Norm(camera.View()) * 0.025;
-    if (e->delta() > 0)
+    if (e->angleDelta().y() > 0)
     {
       cameraOrthoSize -= MoveScale;
       camera.BackForth(MoveScale);

@@ -4,8 +4,7 @@
 #include "glew.h"
 
 #include <string>
-#include <QtWidgets/QOpenGLWidget>
-#include <QtOpenGL/QGLWidget>
+#include <QtOpenGLWidgets/QOpenGLWidget>
 
 // Shader API
 GLuint read_program(const char *filename, const char *definitions = "");

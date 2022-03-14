@@ -8,6 +8,8 @@
 #include "mesh.h"
 #include "meshcolor.h"
 
+#include <QtCore/QMap>
+
 // Utility class for profiling CPU & GPU
 typedef std::chrono::time_point<std::chrono::high_resolution_clock> MyChrono;
 class RenderingProfiler

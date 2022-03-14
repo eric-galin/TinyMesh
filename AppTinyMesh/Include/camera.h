@@ -60,7 +60,6 @@ public:
 
   // Pixel and sub-pixel sampling
   Ray PixelToRay(int, int, int, int) const;
-  Ray PixelToRay(int, int, int, int, int, int, int) const;
   bool VectorToPixel(const Vector&, double&, double&, int, int) const;
 };
 
