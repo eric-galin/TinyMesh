@@ -151,10 +151,6 @@ public:
   Vector Orthogonal() const;
   void Orthonormal(Vector&, Vector&) const;
 
-  // Swap
-  friend void Swap(Vector&, Vector&);
-  friend void Swap(Vector*&, Vector*&);
-
   friend Vector Lerp(const Vector&, const Vector&, double);
   static Vector Bilinear(const Vector&, const Vector&, const Vector&, const Vector&, double, double);
 

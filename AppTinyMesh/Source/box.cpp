@@ -205,6 +205,8 @@ void Box::Scale(double s)
   // Swap coordinates for negative coefficients 
   if (s < 0.0)
   {
-    Swap(a, b);
+    Vector t = a;
+    a = b;
+    b = t;
   }
 }

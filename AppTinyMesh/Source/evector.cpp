@@ -60,28 +60,6 @@ void Normalize(Vector& u)
 }
 
 /*!
-\brief Swap two vectors.
-\param a, b Vectors.
-*/
-void Swap(Vector& a, Vector& b)
-{
-  Vector t = a;
-  a = b;
-  b = t;
-}
-
-/*!
-\brief Swap two pointers to (arrays) vectors.
-\param a, b Vectors.
-*/
-void Swap(Vector*& a, Vector*& b)
-{
-  Vector* t = a;
-  a = b;
-  b = t;
-}
-
-/*!
 \brief Returns a vector orthogonal to the argument vector.
 
 The returned orthogonal vector is not computed randomly.

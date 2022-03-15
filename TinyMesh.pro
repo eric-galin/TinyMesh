@@ -28,7 +28,6 @@ HEADERS  += mainwindow.h \
     Include/box.h \
     Include/camera.h \
     Include/color.h \
-    Include/evector.h \
     Include/glew.h \
     Include/mathematics.h \
     Include/mesh.h \
