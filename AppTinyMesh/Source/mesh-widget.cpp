@@ -276,6 +276,7 @@ void MeshWidget::initializeGL()
     std::cin.get();
     exit(-1);
   }
+  std::cout << "Using GL_VERSION: " << glGetString(GL_VERSION) << std::endl;
 
   glEnable(GL_LINE_SMOOTH);
   glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
@@ -291,19 +292,18 @@ void MeshWidget::initializeGL()
  // fmt.setSwapInterval(0);
  // QGLFormat::setDefaultFormat(fmt);
 
+#ifdef _WIN32
+  QString pPath = ".";
+#elif __linux__
+  QString pPath = "./AppTinyMesh";
+#endif 
+
   // Shader/Camera/Profiler
-  QString pPath = "./";
-  if (pPath.isEmpty())
-  {
-    std::cout << "TerrainMeshWidget::initializeGL() : variable d'environnement MAYADIR non défini" << std::endl;
-    std::cin.get();
-    exit(-1);
-  }
   QString fullPath = pPath + QString("/Shaders/mesh.glsl");
   QByteArray ba = fullPath.toLocal8Bit();
   mainShaderProgram = read_program(ba.data());
   camera = Camera(Vector(-10.0), Vector(0.0));
-  SetNearAndFarPlane(1.0, 10000.0);
+  SetNearAndFarPlane(1.0, 5000.0);
   profiler.Init();
 
   // Sky

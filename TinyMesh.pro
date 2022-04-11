@@ -4,46 +4,54 @@
 #
 #-------------------------------------------------
 
-QT       += core gui opengl
+QT       += core gui opengl openglwidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = TinyMesh
 TEMPLATE = app
 
-SOURCES += Source/box.cpp \
-    Source/camera.cpp \
-    Source/evector.cpp \
-    Source/main.cpp \
-    Source/mesh-widget.cpp \
-    Source/mesh.cpp \
-    Source/meshcolor.cpp \
-    Source/qtemainwindow.cpp \
-    Source/ray.cpp \
-    Source/shader-api.cpp \
-    Source/triangle.cpp
+SOURCES += AppTinyMesh/Source/box.cpp \
+    AppTinyMesh/Source/camera.cpp \
+    AppTinyMesh/Source/evector.cpp \
+    AppTinyMesh/Source/main.cpp \
+    AppTinyMesh/Source/mesh-widget.cpp \
+    AppTinyMesh/Source/mesh.cpp \
+    AppTinyMesh/Source/meshcolor.cpp \
+    AppTinyMesh/Source/qtemainwindow.cpp \
+    AppTinyMesh/Source/ray.cpp \
+    AppTinyMesh/Source/shader-api.cpp \
+    AppTinyMesh/Source/triangle.cpp
 
-HEADERS  += mainwindow.h \
-    Include/GL.h \
-    Include/box.h \
-    Include/camera.h \
-    Include/color.h \
-    Include/glew.h \
-    Include/mathematics.h \
-    Include/mesh.h \
-    Include/meshcolor.h \
-    Include/qte.h \
-    Include/ray.h \
-    Include/realtime.h \
-    Include/shader-api.h \
-    Include/ui-interface.h
+HEADERS  += AppTinyMesh/Include/qte.h \
+    AppTinyMesh/Include/GL.h \
+    AppTinyMesh/Include/box.h \
+    AppTinyMesh/Include/camera.h \
+    AppTinyMesh/Include/color.h \
+    AppTinyMesh/Include/glew.h \
+    AppTinyMesh/Include/mathematics.h \
+    AppTinyMesh/Include/mesh.h \
+    AppTinyMesh/Include/meshcolor.h \
+    AppTinyMesh/Include/qte.h \
+    AppTinyMesh/Include/ray.h \
+    AppTinyMesh/Include/realtime.h \
+    AppTinyMesh/Include/shader-api.h \
+    AppTinyMesh/Include/ui-interface.h
 
 FORMS    += \
-    UI/interface.ui
+    AppTinyMesh/UI/interface.ui
 
-INCLUDEPATH += Include/
+INCLUDEPATH += AppTinyMesh/Include/
 
-#---- Comment the following line on MacOS
+release: DESTDIR = Out/Release
+debug:   DESTDIR = Out/Debug
+
+OBJECTS_DIR = $$DESTDIR/.obj
+MOC_DIR = $$DESTDIR/.moc
+RCC_DIR = $$DESTDIR/.qrc
+UI_DIR = $$DESTDIR/.ui
+
+#---- Comment the following line on MacOS/Linux
 LIBS = -lGLU -lGLEW
 
 #---- Uncomment the following line on Windows

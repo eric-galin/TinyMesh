@@ -8,7 +8,6 @@
 
 #include "realtime.h"
 
-
 // charge un fichier texte.
 static
 std::string read(const char* filename)
@@ -281,10 +280,17 @@ int print_errors(std::string& errors, const char* log, const char* source)
   {
     // recupere la ligne assiciee a l'erreur
     int string_id = 0, line_id = 0, position = 0;
+#ifdef _WIN32
     if (sscanf_s(&log[i], "%d ( %d ) : %n", &string_id, &line_id, &position) == 2        // nvidia syntax
-      || sscanf_s(&log[i], "%d : %d (%*d) : %n", &string_id, &line_id, &position) == 2  // mesa syntax
-      || sscanf_s(&log[i], "ERROR : %d : %d : %n", &string_id, &line_id, &position) == 2  // ati syntax
-      || sscanf_s(&log[i], "WARNING : %d : %d : %n", &string_id, &line_id, &position) == 2)  // ati syntax
+        || sscanf_s(&log[i], "%d : %d (%*d) : %n", &string_id, &line_id, &position) == 2  // mesa syntax
+        || sscanf_s(&log[i], "ERROR : %d : %d : %n", &string_id, &line_id, &position) == 2  // ati syntax
+        || sscanf_s(&log[i], "WARNING : %d : %d : %n", &string_id, &line_id, &position) == 2)  // ati syntax
+#elif __linux__
+    if (sscanf(&log[i], "%d ( %d ) : %n", &string_id, &line_id, &position) == 2        // nvidia syntax
+        || sscanf(&log[i], "%d : %d (%*d) : %n", &string_id, &line_id, &position) == 2  // mesa syntax
+        || sscanf(&log[i], "ERROR : %d : %d : %n", &string_id, &line_id, &position) == 2  // ati syntax
+        || sscanf(&log[i], "WARNING : %d : %d : %n", &string_id, &line_id, &position) == 2)  // ati syntax
+#endif 
     {
       if (string_id != last_string || line_id != last_line)
       {
