@@ -72,9 +72,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\evector.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="Include\box.h">
       <Filter>Include</Filter>
     </ClInclude>
