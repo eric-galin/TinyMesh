@@ -68,17 +68,6 @@ void Camera::Translate(const Vector& t)
 }
 
 /*!
-\brief Steps forward or backward by a given distance.
-
-\param r Stepping distance.
-*/
-void Camera::Step(double r)
-{
-  eye += Normalized(at - eye) * r;
-  at += Normalized(at - eye) * r;
-}
-
-/*!
 \brief Overloaded.
 \param s Stream.
 \param camera The camera.

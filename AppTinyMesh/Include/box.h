@@ -11,8 +11,7 @@
 class Box
 {
 protected:
-  Vector a; //!< Lower vertex.
-  Vector b; //!< Upper vertex.
+  Vector a,b; //!< Lower and upper vertex.
 public:
   //! Empty.
   Box() {}
@@ -41,8 +40,6 @@ public:
   Vector Diagonal() const;
   double Radius() const;
 
-  double R(const Vector&) const;
-  Vector Normal(const Vector&) const;
   bool Inside(const Box&) const;
   bool Inside(const Vector&) const;
 
@@ -51,14 +48,12 @@ public:
 
   // Extend box to cube
   Box Extended(double) const;
-  void Extend(const Vector&);
 
   // Compute sub-box
   Box Sub(int) const;
 
   // Translation, scale
   void Translate(const Vector&);
-  Box Translated(const Vector&) const;
   void Scale(double);
 
   friend std::ostream& operator<<(std::ostream&, const Box&);
@@ -142,58 +137,6 @@ inline double Box::Area() const
 {
   Vector side = b - a;
   return 2.0 * (side[0] * side[1] + side[0] * side[2] + side[1] * side[2]);
-}
-
-/*!
-\brief Computes the squared minimum distance between the box and a point.
-\param p Point.
-*/
-inline double Box::R(const Vector& p) const
-{
-  double r = 0.0;
-
-  for (int i = 0; i < 3; i++)
-  {
-    if (p[i] < a[i])
-    {
-      double s = p[i] - a[i];
-      r += s * s;
-    }
-    else if (p[i] > b[i])
-    {
-      double s = p[i] - b[i];
-      r += s * s;
-    }
-  }
-  return r;
-}
-
-/*!
-\brief Computes the normal vector between a point and a box.
-
-Let <b>q</b> the projection of <b>p</b> onto the box, the normal vector is defined as <b>n</b>=<b>p</b>-<b>q</b>.
-\param p Point.
-*/
-inline Vector Box::Normal(const Vector& p) const
-{
-  Vector n;
-
-  for (int i = 0; i < 3; i++)
-  {
-    if (p[i] < a[i])
-    {
-      n[i] = p[i] - a[i];
-    }
-    else if (p[i] > b[i])
-    {
-      n[i] = p[i] - b[i];
-    }
-    else
-    {
-      n[i] = 0.0;
-    }
-  }
-  return n;
 }
 
 /*!

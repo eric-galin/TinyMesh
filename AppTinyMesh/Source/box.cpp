@@ -136,18 +136,6 @@ Box Box::Extended(double r) const
 }
 
 /*!
-\brief Extend the limits of the box given a point.
-
-If the point lies inside the box, the vertices of the box are unchanged.
-\param p Point.
-*/
-void Box::Extend(const Vector& p)
-{
-  a = Vector::Min(a, p);
-  b = Vector::Max(b, p);
-}
-
-/*!
 \brief Computes the sub-box in the n-th octant.
 \param n Octant index.
 */
@@ -178,16 +166,6 @@ void Box::Translate(const Vector& t)
 {
   a += t;
   b += t;
-}
-
-/*!
-\brief Translated box.
-
-\param t Translation vector.
-*/
-Box Box::Translated(const Vector& t) const
-{
-  return Box(a + t, b + t);
 }
 
 /*!

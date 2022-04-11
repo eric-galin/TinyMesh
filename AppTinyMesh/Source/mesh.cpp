@@ -161,35 +161,6 @@ Box Mesh::GetBox() const
   return Box(vertices);
 }
 
-/*
-\brief Check if a point is inside or outside of the object.
-
-This is a brute force algorithm, that computes all the intersections between the ray and the triangles of the object.
-
-The mesh should be closed, i.e. without holes.
-\param p Point.
-*/
-bool Mesh::Inside(const Vector& p) const
-{
-  // Ray used for intersecting the triangles
-  const Ray ray(p, Vector(1.0, 0.0, 0.0));
-  bool check = false;
-
-  for (int i = 0; i < varray.size() / 3; i++)
-  {
-    // Temporary depth
-    double t;
-    double u, v;
-    // Edge
-    if (GetTriangle(i).Intersect(ray, t, u, v))
-    {
-      if (t >= 0.0) check = !check;
-    }
-  }
-
-  return check;
-}
-
 /*!
 \brief Creates an axis aligned box.
 

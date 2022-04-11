@@ -154,8 +154,6 @@ public:
   friend Vector Lerp(const Vector&, const Vector&, double);
   static Vector Bilinear(const Vector&, const Vector&, const Vector&, const Vector&, double, double);
 
-  static double Slope(const Vector&, const Vector&);
-
   // Scale
   Vector Scaled(const Vector&) const;
   Vector Inverse() const;
@@ -455,16 +453,4 @@ The values are given in trigonometric order.
 inline Vector Vector::Bilinear(const Vector& a00, const Vector& a10, const Vector& a11, const Vector& a01, double u, double v)
 {
   return (1 - u) * (1 - v) * a00 + (1 - u) * (v)*a01 + (u) * (1 - v) * a10 + (u) * (v)*a11;
-}
-
-/*!
-\brief Compute the vertical slope between two vectors.
-
-This is a convenience function.
-\param a,b Argument vectors.
-*/
-inline double Vector::Slope(const Vector& a, const Vector& b)
-{
-  Vector ab = b - a;
-  return (ab[2]) / sqrt(ab[0] * ab[0] + ab[1] * ab[1]);
 }

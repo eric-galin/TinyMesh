@@ -109,8 +109,6 @@ public:
 
   Vector operator[](int) const;
 
-  bool Inside(const Vector&) const;
-
   Box GetBox() const;
 
   void Translate(const Vector&);

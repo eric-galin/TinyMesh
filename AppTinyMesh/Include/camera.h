@@ -40,8 +40,6 @@ public:
   double GetAngleOfViewH() const;
   double GetAngleOfViewV(double, double) const;
 
-  void Step(double);
-
   void Vertical();
 
   void BackForth(double, bool = false);
