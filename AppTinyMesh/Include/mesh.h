@@ -8,7 +8,7 @@
 class Triangle
 {
 protected:
-  Vector p[3]; //!< Array of vertices.
+  Vector p[3] = {Vector(0.0,0.0,0.0),Vector(1.0,0.0,0.0), Vector(0.0,1.0,0.0), }; //!< Array of vertices.
 public:
   //! Empty.
   Triangle() {}
@@ -111,7 +111,6 @@ public:
 
   Box GetBox() const;
 
-  void Translate(const Vector&);
   void Scale(double);
 
   void SmoothNormals();

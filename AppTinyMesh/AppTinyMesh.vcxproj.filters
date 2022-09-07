@@ -38,6 +38,9 @@
     <ClCompile Include="Source\realtime-moc.cpp">
       <Filter>Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Source\implicits.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Include\qte.h">
@@ -94,6 +97,9 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Include\mathematics.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\implicits.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>

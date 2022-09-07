@@ -46,9 +46,6 @@ public:
   double Volume() const;
   double Area() const;
 
-  // Extend box to cube
-  Box Extended(double) const;
-
   // Compute sub-box
   Box Sub(int) const;
 

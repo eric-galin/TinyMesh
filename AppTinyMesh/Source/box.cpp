@@ -14,15 +14,12 @@ fly by inline functions.
 The vertices of a box can be obtained by the Box::Vertex()
 member function which returns one of the eight vertices of the box.
 The two opposite corners can be obtained faster as follows:
+
 \code
 Box box(Vector(0.0,0.0,0.0),Vector(1.0,1.0,1.0)); // Unit box
 Vector a=box[0]; // Lower vertex
 Vector b=box[1]; // Opposite vertex
 \endcode
-
-This class provides a set of useful functions, such as the intersection
-between a box and a ray. This class also implements the Minkowski sum
-of boxes by overloading some operators.
 */
 
 const double Box::epsilon = 1.0e-5; //!< Epsilon value used to check intersections and some round off errors.
@@ -122,17 +119,6 @@ Box::Box(const Box& x, const Box& y)
 {
   a = Vector::Min(x.a, y.a);
   b = Vector::Max(x.b, y.b);
-}
-
-/*!
-\brief Extend the limits of the box by a given distance.
-
-Note that this is the same as performing the Minkowski sum with a cubic box of size r.
-\param r Range.
-*/
-Box Box::Extended(double r) const
-{
-  return Box(a - Vector(r), b + Vector(r));
 }
 
 /*!

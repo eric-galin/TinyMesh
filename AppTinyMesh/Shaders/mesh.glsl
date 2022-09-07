@@ -90,6 +90,7 @@ in float ratio;
 uniform int material;
 uniform int shading;
 uniform int useWireframe;
+uniform vec3 viewDir;
 
 out vec4 fragment;
 
@@ -126,7 +127,8 @@ vec4 GetBaseColor()
 	// Color
 	if (material == 1)
 	{
-		return vec4(fragColor.xyz * Diffuse(fragNormal, normalize(-vec3(0.2, 0.8, 0.0))), 1.0);
+		// normalize(-vec3(0.2, 0.8, 0.0))
+		return vec4(fragColor.xyz * Diffuse(fragNormal, -viewDir), 1.0);
 	}
 }
 

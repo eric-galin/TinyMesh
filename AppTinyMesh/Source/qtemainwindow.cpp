@@ -1,4 +1,5 @@
 #include "qte.h"
+#include "implicits.h"
 
 MainWindow::MainWindow()
 {
@@ -15,7 +16,7 @@ MainWindow::MainWindow()
 	// Creation des connect
 	CreateActions();
 
-	meshWidget->SetCamera(Camera(Vector(639, -604, 76), Vector(0.0, 0.0, 0.0)));
+	meshWidget->SetCamera(Camera(Vector(10, 0, 0), Vector(0.0, 0.0, 0.0)));
 }
 
 MainWindow::~MainWindow()
@@ -27,8 +28,11 @@ void MainWindow::CreateActions()
 {
 	// Buttons
 	connect(uiw.boxMesh, SIGNAL(clicked()), this, SLOT(BoxMeshExample()));
+	connect(uiw.sphereImplicit, SIGNAL(clicked()), this, SLOT(SphereImplicitExample()));
 	connect(uiw.resetcameraButton, SIGNAL(clicked()), this, SLOT(ResetCamera()));
 	connect(uiw.wireframe, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
+	connect(uiw.radioShadingButton_1, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
+	connect(uiw.radioShadingButton_2, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
 
 	// Widget edition
 	connect(meshWidget, SIGNAL(_signalEditSceneLeft(const Ray&)), this, SLOT(editingSceneLeft(const Ray&)));
@@ -45,8 +49,32 @@ void MainWindow::editingSceneRight(const Ray&)
 
 void MainWindow::BoxMeshExample()
 {
-	meshColor = MeshColor(Mesh(Box(1.0)));
+	Mesh boxMesh = Mesh(Box(1.0));
+
+	QVector<Color> cols;
+	cols.resize(boxMesh.Vertexes());
+	for (int i = 0; i < cols.size(); i++)
+		cols[i] = Color(double(i) / 6.0, fmod(double(i) * 39.478378, 1.0), 0.0);
+
+	meshColor = MeshColor(boxMesh, cols, boxMesh.VertexIndexes());
 	UpdateGeometry();
+}
+
+void MainWindow::SphereImplicitExample()
+{
+  AnalyticScalarField implicit;
+
+  Mesh implicitMesh;
+  implicit.Polygonize(31, implicitMesh, Box(2.0));
+
+  QVector<Color> cols;
+  cols.resize(implicitMesh.Vertexes());
+  for (int i = 0; i < cols.size(); i++)
+    cols[i] = Color(0.8, 0.8, 0.8);
+
+  meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+  UpdateGeometry();
+
 }
 
 void MainWindow::UpdateGeometry()
@@ -63,6 +91,11 @@ void MainWindow::UpdateGeometry()
 void MainWindow::UpdateMaterial()
 {
 	meshWidget->UseWireframeGlobal(uiw.wireframe->isChecked());
+
+	if (uiw.radioShadingButton_1->isChecked())
+		meshWidget->SetMaterialGlobal(MeshMaterial::Normal);
+	else
+		meshWidget->SetMaterialGlobal(MeshMaterial::Color);
 }
 
 void MainWindow::ResetCamera()

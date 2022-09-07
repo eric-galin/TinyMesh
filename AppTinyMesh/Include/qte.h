@@ -7,25 +7,26 @@
 
 class MainWindow : public QMainWindow
 {
-	Q_OBJECT
+  Q_OBJECT
 private:
-	Ui::Assets uiw;				//!< Interface
+  Ui::Assets uiw;				//!< Interface
 
-	MeshWidget* meshWidget;		//!< Viewer
-	MeshColor meshColor;		//!< Mesh.
+  MeshWidget* meshWidget;		//!< Viewer
+  MeshColor meshColor;		//!< Mesh.
 
 public:
-	MainWindow();
-	~MainWindow();
-	void CreateActions();
-	void UpdateGeometry();
+  MainWindow();
+  ~MainWindow();
+  void CreateActions();
+  void UpdateGeometry();
 
 public slots:
-	void editingSceneLeft(const Ray&);
-	void editingSceneRight(const Ray&);
-	void BoxMeshExample();
-	void ResetCamera();
-	void UpdateMaterial();
+  void editingSceneLeft(const Ray&);
+  void editingSceneRight(const Ray&);
+  void BoxMeshExample();
+  void SphereImplicitExample();
+  void ResetCamera();
+  void UpdateMaterial();
 };
 
 #endif

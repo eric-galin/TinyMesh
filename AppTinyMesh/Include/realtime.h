@@ -65,7 +65,7 @@ public:
   {
     nbframes++;
     auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start).count();
-    double seconds = double(microseconds) / 1000000.0;
+    const double seconds = static_cast<double>(microseconds) / 1000000.0;
     if (seconds >= 1.0)
     {
       msPerFrame = seconds * 1000.0 / nbframes;
@@ -101,7 +101,7 @@ protected:
     GLuint fullBuffer;			//!< Mesh buffer. Contains 3D normals, 2D vertices and heights.
     GLuint indexBuffer;			//!< Mesh index buffer.
     int triangleCount;			//!< Triangle count to draw.
-    float TRSMatrix[16];		//!< Translation-Rotation-Scale Matrix (computed from a FrameScaled).
+    float TRSMatrix[16];		//!< Translation-Rotation-Scale Matrix.
     Box bbox;					//!< Bounding box of the mesh.
 
     MeshShading shading;		//!< Render flag.
@@ -116,20 +116,19 @@ protected:
     void Delete();
     void SetFrame(const Vector& position);
   };
+
   typedef QMap<QString, MeshGL*>::iterator MeshIterator;
 
 protected:
   // Scene
   int x0, y0;
-  bool perspectiveProjection;
-  double cameraOrthoSize;
+  bool perspectiveProjection = true;
+  double cameraOrthoSize = 100.0;
   Camera camera;
   bool MoveAt = false;
   Vector currentAt = Vector::Null;
   Vector toAt = Vector::Null;
   int stepAt = 0;
-  double nearplane;
-  double farplane;
 
   // Meshes
   GLuint mainShaderProgram;

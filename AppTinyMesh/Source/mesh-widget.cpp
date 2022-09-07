@@ -248,8 +248,6 @@ void MeshWidget::MeshGL::SetFrame(const Vector& fr)
 */
 MeshWidget::MeshWidget()
 {
-  perspectiveProjection = true;
-  cameraOrthoSize = 100.0f;
 }
 
 /*!
@@ -379,6 +377,8 @@ void MeshWidget::paintGL()
   // Shared uniforms
   glUniformMatrix4fv(glGetUniformLocation(mainShaderProgram, "ModelViewMatrix"), 1, 0, ModelViewMatrix);
   glUniformMatrix4fv(glGetUniformLocation(mainShaderProgram, "ProjectionMatrix"), 1, 0, ProjectionMatrix);
+  Vector view = Normalized(camera.View());
+  glUniform3f(glGetUniformLocation(mainShaderProgram, "viewDir"), view[0], view[1], view[2]);
 
   for (MeshIterator i = objects.begin(); i != objects.end(); i++)
   {
@@ -501,15 +501,15 @@ Ray MeshWidget::ComputeRay(const QPoint& pix) const
 }
 
 /*!
-\brief Set the camera for the widget
-\param cam new camera
+\brief Set the camera for the widget.
+\param c New camera.
 */
-void MeshWidget::SetCamera(const Camera& cam)
+void MeshWidget::SetCamera(const Camera& c)
 {
   makeCurrent();
 
-  camera = cam;
-  camera.SetPlanes(nearplane, farplane);
+  camera = c;
+
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
@@ -526,10 +526,8 @@ void MeshWidget::SetCamera(const Camera& cam)
 void MeshWidget::SetNearAndFarPlane(double n, double f)
 {
   makeCurrent();
-  nearplane = n;
-  farplane = f;
 
-  camera.SetPlanes(nearplane, farplane);
+  camera.SetPlanes(n, f);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 

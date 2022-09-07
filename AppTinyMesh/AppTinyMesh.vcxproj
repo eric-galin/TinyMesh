@@ -104,6 +104,7 @@
     <ClCompile Include="Source\box.cpp" />
     <ClCompile Include="Source\camera.cpp" />
     <ClCompile Include="Source\evector.cpp" />
+    <ClCompile Include="Source\implicits.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\mesh-widget.cpp" />
     <ClCompile Include="Source\mesh.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Include\box.h" />
     <ClInclude Include="Include\camera.h" />
     <ClInclude Include="Include\color.h" />
+    <ClInclude Include="Include\implicits.h" />
     <ClInclude Include="Include\mathematics.h" />
     <ClInclude Include="Include\mesh.h" />
     <ClInclude Include="Include\meshcolor.h" />

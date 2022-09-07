@@ -27,11 +27,8 @@ The right vector, which is always computed as a cross product between the view v
 \param width, height Width and height of virtual screen.
 \param near, far Near and far planes.
 */
-Camera::Camera(const Vector& eye, const Vector& at, const Vector& up, double width, double height, double near, double far)
+Camera::Camera(const Vector& eye, const Vector& at, const Vector& up, double width, double height, double near, double far) :eye(eye), at(at), up(up)
 {
-  Camera::eye = eye;
-  Camera::at = at;
-  Camera::up = up;
   Camera::width = width;
   Camera::height = height;
 
@@ -55,16 +52,6 @@ Camera::Camera(const Vector& eye, const Vector& at, const Vector& up, double wid
 */
 Camera::Camera(const Vector& eye, const Vector& at, const Vector& up, double field, double near, double far) :Camera(eye, at, up, sin(field / 2.0), sin(field / 2.0), near, far)
 {
-}
-
-/*!
-\brief Translates a camera by a given vector.
-\param t %Translation vector.
-*/
-void Camera::Translate(const Vector& t)
-{
-  eye += t;
-  at += t;
 }
 
 /*!
@@ -258,9 +245,9 @@ Ray Camera::PixelToRay(int px, int py, int w, int h) const
 bool Camera::VectorToPixel(const Vector& p, double& u, double& v, int w, int h) const
 {
   // Get coordinates
-  Vector view = Normalized(At() - Eye());
-  Vector horizontal = Normalized(view / Up());
-  Vector vertical = Normalized(horizontal / view);
+  const Vector view = Normalized(At() - Eye());
+  const Vector horizontal = Normalized(view / Up());
+  const Vector vertical = Normalized(horizontal / view);
 
   // Convert to radians 
   double rad = GetAngleOfViewV(w, h);  // fov
@@ -269,7 +256,7 @@ bool Camera::VectorToPixel(const Vector& p, double& u, double& v, int w, int h) 
   double hLength = vLength * (double(w) / double(h));
 
   // Direction
-  Vector ep = p - Eye();
+  const Vector ep = p - Eye();
   u = horizontal * ep / vLength;
   v = vertical * ep / hLength;
   double z = view * ep;

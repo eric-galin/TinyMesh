@@ -43,6 +43,7 @@ public:
     QGroupBox *Objects_groupBox;
     QPushButton *boxMesh;
     QPushButton *resetcameraButton;
+    QPushButton *sphereImplicit;
     QWidget *widget_GL;
     QGroupBox *Parameters_groupBox;
     QGroupBox *groupBox_4;
@@ -53,6 +54,7 @@ public:
     QGroupBox *groupBox_13;
     QRadioButton *radioShadingButton_1;
     QCheckBox *wireframe;
+    QRadioButton *radioShadingButton_2;
     QMenuBar *menubar;
     QMenu *menuFile;
 
@@ -97,14 +99,18 @@ public:
         Objects_groupBox->setMinimumSize(QSize(350, 250));
         boxMesh = new QPushButton(Objects_groupBox);
         boxMesh->setObjectName(QString::fromUtf8("boxMesh"));
-        boxMesh->setGeometry(QRect(20, 20, 81, 23));
+        boxMesh->setGeometry(QRect(20, 20, 101, 23));
         boxMesh->setCheckable(false);
         resetcameraButton = new QPushButton(Objects_groupBox);
         resetcameraButton->setObjectName(QString::fromUtf8("resetcameraButton"));
-        resetcameraButton->setGeometry(QRect(110, 20, 81, 23));
+        resetcameraButton->setGeometry(QRect(140, 20, 81, 23));
         resetcameraButton->setCheckable(true);
         resetcameraButton->setAutoDefault(false);
         resetcameraButton->setFlat(false);
+        sphereImplicit = new QPushButton(Objects_groupBox);
+        sphereImplicit->setObjectName(QString::fromUtf8("sphereImplicit"));
+        sphereImplicit->setGeometry(QRect(20, 50, 101, 23));
+        sphereImplicit->setCheckable(false);
 
         hboxLayout->addWidget(Objects_groupBox);
 
@@ -149,13 +155,17 @@ public:
         wireframe->setObjectName(QString::fromUtf8("wireframe"));
         wireframe->setGeometry(QRect(90, 20, 81, 17));
         wireframe->setChecked(true);
+        radioShadingButton_2 = new QRadioButton(groupBox_13);
+        radioShadingButton_2->setObjectName(QString::fromUtf8("radioShadingButton_2"));
+        radioShadingButton_2->setGeometry(QRect(20, 50, 61, 20));
+        radioShadingButton_2->setChecked(false);
 
         hboxLayout->addWidget(Parameters_groupBox);
 
         Assets->setCentralWidget(centralwidget);
         menubar = new QMenuBar(Assets);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1200, 21));
+        menubar->setGeometry(QRect(0, 0, 1200, 22));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         Assets->setMenuBar(menubar);
@@ -199,6 +209,15 @@ public:
         resetcameraButton->setToolTip(QCoreApplication::translate("Assets", "<html><head/><body><p><span style=\" color:#5500ff;\">Callback #03</span></p><p><span style=\" font-style:italic; color:#aa00ff;\">Create Eurographics 1996 Bird</span></p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
         resetcameraButton->setText(QCoreApplication::translate("Assets", "Reset Camera", nullptr));
+#if QT_CONFIG(tooltip)
+        sphereImplicit->setToolTip(QCoreApplication::translate("Assets", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#5500ff;\">Callback #01</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic; color:#aa00ff;\">Create Eurographics 1996 Bear</span></p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
+        sphereImplicit->setText(QCoreApplication::translate("Assets", "Sphere Implicit", nullptr));
         Parameters_groupBox->setTitle(QString());
         groupBox_4->setTitle(QCoreApplication::translate("Assets", " Statistics", nullptr));
         label_2->setText(QCoreApplication::translate("Assets", "Vertex", nullptr));
@@ -207,6 +226,7 @@ public:
         groupBox_13->setTitle(QCoreApplication::translate("Assets", "Shading", nullptr));
         radioShadingButton_1->setText(QCoreApplication::translate("Assets", "Normal", nullptr));
         wireframe->setText(QCoreApplication::translate("Assets", "Wireframe", nullptr));
+        radioShadingButton_2->setText(QCoreApplication::translate("Assets", "Color", nullptr));
         menuFile->setTitle(QCoreApplication::translate("Assets", "File", nullptr));
     } // retranslateUi
 

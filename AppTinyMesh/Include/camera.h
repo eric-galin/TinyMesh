@@ -28,8 +28,6 @@ public:
   explicit Camera(const Vector&, const Vector&, const Vector & = Vector::Z, double = 1.0, double = 1.0, double = 1.0, double = 100000.0);
   explicit Camera(const Vector&, const Vector&, const Vector&, double, double = 1.0, double = 100000.0);
 
-  void Translate(const Vector&);
-
   Vector At() const;
   Vector Eye() const;
   Vector Up() const;
