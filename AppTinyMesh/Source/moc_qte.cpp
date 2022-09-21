@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qte.h'
 **
-** Created by: The Qt Meta Object Compiler version 68 (Qt 6.1.3)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.3.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -13,7 +13,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'qte.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
-#error "This file was generated using the moc from 6.1.3. It"
+#error "This file was generated using the moc from 6.3.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -50,7 +50,7 @@ QT_MOC_LITERAL(100, 14) // "UpdateMaterial"
 static const uint qt_meta_data_MainWindow[] = {
 
  // content:
-       9,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
        6,   14, // methods
@@ -61,12 +61,12 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   50,    2, 0x0a,    0 /* Public */,
-       4,    1,   53,    2, 0x0a,    2 /* Public */,
-       5,    0,   56,    2, 0x0a,    4 /* Public */,
-       6,    0,   57,    2, 0x0a,    5 /* Public */,
-       7,    0,   58,    2, 0x0a,    6 /* Public */,
-       8,    0,   59,    2, 0x0a,    7 /* Public */,
+       1,    1,   50,    2, 0x0a,    1 /* Public */,
+       4,    1,   53,    2, 0x0a,    3 /* Public */,
+       5,    0,   56,    2, 0x0a,    5 /* Public */,
+       6,    0,   57,    2, 0x0a,    6 /* Public */,
+       7,    0,   58,    2, 0x0a,    7 /* Public */,
+       8,    0,   59,    2, 0x0a,    8 /* Public */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -85,8 +85,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->editingSceneLeft((*reinterpret_cast< const Ray(*)>(_a[1]))); break;
-        case 1: _t->editingSceneRight((*reinterpret_cast< const Ray(*)>(_a[1]))); break;
+        case 0: _t->editingSceneLeft((*reinterpret_cast< std::add_pointer_t<Ray>>(_a[1]))); break;
+        case 1: _t->editingSceneRight((*reinterpret_cast< std::add_pointer_t<Ray>>(_a[1]))); break;
         case 2: _t->BoxMeshExample(); break;
         case 3: _t->SphereImplicitExample(); break;
         case 4: _t->ResetCamera(); break;
@@ -103,7 +103,7 @@ const QMetaObject MainWindow::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_MainWindow_t
-
+, QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>
 , QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Ray &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Ray &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 

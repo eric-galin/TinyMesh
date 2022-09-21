@@ -49,7 +49,9 @@
     <CustomBuild Include="UI\interface.ui">
       <Filter>Interface</Filter>
     </CustomBuild>
-    <CustomBuild Include="Include\realtime.h" />
+    <CustomBuild Include="Include\realtime.h">
+      <Filter>Include</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Include">

@@ -91,7 +91,7 @@ Box::Box(double r)
 \brief Creates the bounding box of a set of points.
 \param v Array of vertices.
 */
-Box::Box(const QVector<Vector>& v)
+Box::Box(const std::vector<Vector>& v)
 {
   for (int j = 0; j < 3; j++)
   {

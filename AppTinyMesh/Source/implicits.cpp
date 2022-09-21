@@ -28,10 +28,10 @@ double AnalyticScalarField::Value(const Vector& p) const
 */
 void AnalyticScalarField::Polygonize(int n, Mesh& g, const Box& box, const double& epsilon) const
 {
-  QVector<Vector> vertex;
-  QVector<Vector> normal;
+  std::vector<Vector> vertex;
+  std::vector<Vector> normal;
 
-  QVector<int> triangle;
+  std::vector<int> triangle;
 
   vertex.reserve(20000);
   normal.reserve(20000);
@@ -92,8 +92,8 @@ void AnalyticScalarField::Polygonize(int n, Mesh& g, const Box& box, const doubl
       // We need a xor b, which can be implemented a == !b 
       if (!((a[i * ny + j] < 0.0) == !(a[(i + 1) * ny + j] >= 0.0)))
       {
-        vertex.append(Dichotomy(u[i * ny + j], u[(i + 1) * ny + j], a[i * ny + j], a[(i + 1) * ny + j], d[0], epsilon));
-        normal.append(Normal(vertex.last()));
+        vertex.push_back(Dichotomy(u[i * ny + j], u[(i + 1) * ny + j], a[i * ny + j], a[(i + 1) * ny + j], d[0], epsilon));
+        normal.push_back(Normal(vertex.back()));
         eax[i * ny + j] = nv;
         nv++;
       }
@@ -105,8 +105,8 @@ void AnalyticScalarField::Polygonize(int n, Mesh& g, const Box& box, const doubl
     {
       if (!((a[i * ny + j] < 0.0) == !(a[i * ny + (j + 1)] >= 0.0)))
       {
-        vertex.append(Dichotomy(u[i * ny + j], u[i * ny + (j + 1)], a[i * ny + j], a[i * ny + (j + 1)], d[1], epsilon));
-        normal.append(Normal(vertex.last()));
+        vertex.push_back(Dichotomy(u[i * ny + j], u[i * ny + (j + 1)], a[i * ny + j], a[i * ny + (j + 1)], d[1], epsilon));
+        normal.push_back(Normal(vertex.back()));
         eay[i * ny + j] = nv;
         nv++;
       }
@@ -137,8 +137,8 @@ void AnalyticScalarField::Polygonize(int n, Mesh& g, const Box& box, const doubl
         //   if (((b[i*ny + j] < 0.0) && (b[(i + 1)*ny + j] >= 0.0)) || ((b[i*ny + j] >= 0.0) && (b[(i + 1)*ny + j] < 0.0)))
         if (!((b[i * ny + j] < 0.0) == !(b[(i + 1) * ny + j] >= 0.0)))
         {
-          vertex.append(Dichotomy(v[i * ny + j], v[(i + 1) * ny + j], b[i * ny + j], b[(i + 1) * ny + j], d[0], epsilon));
-          normal.append(Normal(vertex.last()));
+          vertex.push_back(Dichotomy(v[i * ny + j], v[(i + 1) * ny + j], b[i * ny + j], b[(i + 1) * ny + j], d[0], epsilon));
+          normal.push_back(Normal(vertex.back()));
           ebx[i * ny + j] = nv;
           nv++;
         }
@@ -152,8 +152,8 @@ void AnalyticScalarField::Polygonize(int n, Mesh& g, const Box& box, const doubl
         // if (((b[i*ny + j] < 0.0) && (b[i*ny + (j + 1)] >= 0.0)) || ((b[i*ny + j] >= 0.0) && (b[i*ny + (j + 1)] < 0.0)))
         if (!((b[i * ny + j] < 0.0) == !(b[i * ny + (j + 1)] >= 0.0)))
         {
-          vertex.append(Dichotomy(v[i * ny + j], v[i * ny + (j + 1)], b[i * ny + j], b[i * ny + (j + 1)], d[1], epsilon));
-          normal.append(Normal(vertex.last()));
+          vertex.push_back(Dichotomy(v[i * ny + j], v[i * ny + (j + 1)], b[i * ny + j], b[i * ny + (j + 1)], d[1], epsilon));
+          normal.push_back(Normal(vertex.back()));
           eby[i * ny + j] = nv;
           nv++;
         }
@@ -168,8 +168,8 @@ void AnalyticScalarField::Polygonize(int n, Mesh& g, const Box& box, const doubl
         // if ((a[i*ny + j] < 0.0) && (b[i*ny + j] >= 0.0) || (a[i*ny + j] >= 0.0) && (b[i*ny + j] < 0.0))
         if (!((a[i * ny + j] < 0.0) == !(b[i * ny + j] >= 0.0)))
         {
-          vertex.append(Dichotomy(u[i * ny + j], v[i * ny + j], a[i * ny + j], b[i * ny + j], d[2], epsilon));
-          normal.append(Normal(vertex.last()));
+          vertex.push_back(Dichotomy(u[i * ny + j], v[i * ny + j], a[i * ny + j], b[i * ny + j], d[2], epsilon));
+          normal.push_back(Normal(vertex.back()));
           ez[i * ny + j] = nv;
           nv++;
         }
@@ -209,9 +209,9 @@ void AnalyticScalarField::Polygonize(int n, Mesh& g, const Box& box, const doubl
 
           for (int h = 0; TriangleTable[cubeindex][h] != -1; h += 3)
           {
-            triangle.append(e[TriangleTable[cubeindex][h + 0]]);
-            triangle.append(e[TriangleTable[cubeindex][h + 1]]);
-            triangle.append(e[TriangleTable[cubeindex][h + 2]]);
+            triangle.push_back(e[TriangleTable[cubeindex][h + 0]]);
+            triangle.push_back(e[TriangleTable[cubeindex][h + 1]]);
+            triangle.push_back(e[TriangleTable[cubeindex][h + 2]]);
           }
         }
       }
@@ -236,7 +236,7 @@ void AnalyticScalarField::Polygonize(int n, Mesh& g, const Box& box, const doubl
   delete[]eby;
   delete[]ez;
 
-  QVector<int> normals = triangle;
+  std::vector<int> normals = triangle;
 
   g = Mesh(vertex, normal, triangle, normals);
 }

@@ -2,8 +2,7 @@
 
 #pragma once
 
-#include <QtCore/QVector>
-
+#include <vector>
 #include <iostream>
 
 #include "mathematics.h"
@@ -18,7 +17,7 @@ public:
   explicit Box(double);
   explicit Box(const Vector&, const Vector&);
   explicit Box(const Vector&, double);
-  explicit Box(const QVector<Vector>&);
+  explicit Box(const std::vector<Vector>&);
   explicit Box(const Box&, const Box&);
 
   //! Empty.

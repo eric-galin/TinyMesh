@@ -7,18 +7,18 @@
 class MeshColor : public Mesh
 {
 protected:
-  QVector<Color> colors; //!< Array of colors.
-  QVector<int> carray;  //!< Indexes.
+  std::vector<Color> colors; //!< Array of colors.
+  std::vector<int> carray;  //!< Indexes.
 
 public:
   explicit MeshColor();
   explicit MeshColor(const Mesh&);
-  explicit MeshColor(const Mesh&, const QVector<Color>&, const QVector<int>&);
+  explicit MeshColor(const Mesh&, const std::vector<Color>&, const std::vector<int>&);
   ~MeshColor();
 
   Color GetColor(int) const;
-  QVector<Color> GetColors() const;
-  QVector<int> ColorIndexes() const;
+  std::vector<Color> GetColors() const;
+  std::vector<int> ColorIndexes() const;
 };
 
 /*!
@@ -34,7 +34,7 @@ inline Color MeshColor::GetColor(int i) const
 /*!
 \brief Get the array of colors.
 */
-inline QVector<Color> MeshColor::GetColors() const
+inline std::vector<Color> MeshColor::GetColors() const
 {
   return colors;
 }
@@ -42,7 +42,7 @@ inline QVector<Color> MeshColor::GetColors() const
 /*!
 \brief Return the set of color indices.
 */
-inline QVector<int> MeshColor::ColorIndexes() const
+inline std::vector<int> MeshColor::ColorIndexes() const
 {
   return carray;
 }

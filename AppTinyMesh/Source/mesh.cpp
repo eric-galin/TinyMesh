@@ -6,7 +6,7 @@
 \brief Core triangle mesh class.
 */
 
-#include <QtCore/QRegularExpression>
+
 
 /*!
 \brief Initialize the mesh to empty.
@@ -23,10 +23,9 @@ Indices must have a size multiple of three (three for triangle vertices and thre
 \param vertices List of geometry vertices.
 \param indices List of indices wich represent the geometry triangles.
 */
-Mesh::Mesh(const QVector<Vector>& vertices, const QVector<int>& indices) :vertices(vertices), varray(indices)
+Mesh::Mesh(const std::vector<Vector>& vertices, const std::vector<int>& indices) :vertices(vertices), varray(indices)
 {
-  normals.reserve(vertices.size());
-  normals.fill(Vector::Z);
+  normals.resize(vertices.size(), Vector::Z);
 }
 
 /*!
@@ -36,7 +35,7 @@ Mesh::Mesh(const QVector<Vector>& vertices, const QVector<int>& indices) :vertic
 \param normals Array of normals.
 \param va, na Array of vertex and normal indexes.
 */
-Mesh::Mesh(const QVector<Vector>& vertices, const QVector<Vector>& normals, const QVector<int>& va, const QVector<int>& na) :vertices(vertices), normals(normals), varray(va), narray(na)
+Mesh::Mesh(const std::vector<Vector>& vertices, const std::vector<Vector>& normals, const std::vector<int>& va, const std::vector<int>& na) :vertices(vertices), normals(normals), varray(va), narray(na)
 {
 }
 
@@ -67,11 +66,8 @@ This function weights the normals of the faces by their corresponding area.
 */
 void Mesh::SmoothNormals()
 {
-  // Set size
-  normals.resize(vertices.size());
-
   // Initialize 
-  normals.fill(Vector(0.0), vertices.size());
+  normals.resize(vertices.size(), Vector::Null);
 
   narray = varray;
 
@@ -98,12 +94,12 @@ void Mesh::SmoothNormals()
 */
 void Mesh::AddSmoothTriangle(int a, int na, int b, int nb, int c, int nc)
 {
-  varray.append(a);
-  narray.append(na);
-  varray.append(b);
-  narray.append(nb);
-  varray.append(c);
-  narray.append(nc);
+  varray.push_back(a);
+  narray.push_back(na);
+  varray.push_back(b);
+  narray.push_back(nb);
+  varray.push_back(c);
+  narray.push_back(nc);
 }
 
 /*!
@@ -113,14 +109,13 @@ void Mesh::AddSmoothTriangle(int a, int na, int b, int nb, int c, int nc)
 */
 void Mesh::AddTriangle(int a, int b, int c, int n)
 {
-  varray.append(a);
-  narray.append(n);
-  varray.append(b);
-  narray.append(n);
-  varray.append(c);
-  narray.append(n);
+  varray.push_back(a);
+  narray.push_back(n);
+  varray.push_back(b);
+  narray.push_back(n);
+  varray.push_back(c);
+  narray.push_back(n);
 }
-
 
 /*!
 \brief Add a smmoth quadrangle to the geometry.
@@ -178,12 +173,12 @@ Mesh::Mesh(const Box& box)
   }
 
   // Normals
-  normals.append(Vector(-1, 0, 0));
-  normals.append(Vector(1, 0, 0));
-  normals.append(Vector(0, -1, 0));
-  normals.append(Vector(0, 1, 0));
-  normals.append(Vector(0, 0, -1));
-  normals.append(Vector(0, 0, 1));
+  normals.push_back(Vector(-1, 0, 0));
+  normals.push_back(Vector(1, 0, 0));
+  normals.push_back(Vector(0, -1, 0));
+  normals.push_back(Vector(0, 1, 0));
+  normals.push_back(Vector(0, 0, -1));
+  normals.push_back(Vector(0, 0, 1));
 
   // Reserve space for the triangle array
   varray.reserve(12 * 3);
@@ -208,9 +203,34 @@ Mesh::Mesh(const Box& box)
   AddTriangle(6, 7, 2, 3);
 }
 
+/*!
+\brief Scale the mesh.
+\param s Scaling factor.
+*/
+void Mesh::Scale(double s)
+{
+    // Vertexes
+    for (int i = 0; i < vertices.size(); i++)
+    {
+        vertices[i] *= s;
+    }
+
+    if (s < 0.0)
+    {
+        // Normals
+        for (int i = 0; i < normals.size(); i++)
+        {
+            normals[i] = -normals[i];
+        }
+    }
+}
+
+
 
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
+#include <QtCore/QRegularExpression>
+#include <QtCore/qstring.h>
 
 /*!
 \brief Import a mesh from an .obj file.
@@ -241,45 +261,23 @@ void Mesh::Load(const QString& filename)
     QRegularExpressionMatch matchT = rext.match(line);
     if (match.hasMatch())//rexv.indexIn(line, 0) > -1)
     {
-      Vector q = Vector(match.captured(1).toDouble(), match.captured(2).toDouble(), match.captured(3).toDouble()); vertices.append(q);
+      Vector q = Vector(match.captured(1).toDouble(), match.captured(2).toDouble(), match.captured(3).toDouble()); vertices.push_back(q);
     }
     else if (matchN.hasMatch())//rexn.indexIn(line, 0) > -1)
     {
-      Vector q = Vector(matchN.captured(1).toDouble(), matchN.captured(2).toDouble(), matchN.captured(3).toDouble());  normals.append(q);
+      Vector q = Vector(matchN.captured(1).toDouble(), matchN.captured(2).toDouble(), matchN.captured(3).toDouble());  normals.push_back(q);
     }
     else if (matchT.hasMatch())//rext.indexIn(line, 0) > -1)
     {
-      varray.append(matchT.captured(1).toInt() - 1);
-      varray.append(matchT.captured(3).toInt() - 1);
-      varray.append(matchT.captured(5).toInt() - 1);
-      narray.append(matchT.captured(2).toInt() - 1);
-      narray.append(matchT.captured(4).toInt() - 1);
-      narray.append(matchT.captured(6).toInt() - 1);
+      varray.push_back(matchT.captured(1).toInt() - 1);
+      varray.push_back(matchT.captured(3).toInt() - 1);
+      varray.push_back(matchT.captured(5).toInt() - 1);
+      narray.push_back(matchT.captured(2).toInt() - 1);
+      narray.push_back(matchT.captured(4).toInt() - 1);
+      narray.push_back(matchT.captured(6).toInt() - 1);
     }
   }
   data.close();
-}
-
-/*!
-\brief Scale the mesh.
-\param s Scaling factor.
-*/
-void Mesh::Scale(double s)
-{
-  // Vertexes
-  for (int i = 0; i < vertices.size(); i++)
-  {
-    vertices[i] *= s;
-  }
-
-  if (s < 0.0)
-  {
-    // Normals
-    for (int i = 0; i < normals.size(); i++)
-    {
-      normals[i] = -normals[i];
-    }
-  }
 }
 
 /*!

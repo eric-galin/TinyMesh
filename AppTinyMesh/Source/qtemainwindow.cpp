@@ -51,7 +51,7 @@ void MainWindow::BoxMeshExample()
 {
 	Mesh boxMesh = Mesh(Box(1.0));
 
-	QVector<Color> cols;
+	std::vector<Color> cols;
 	cols.resize(boxMesh.Vertexes());
 	for (int i = 0; i < cols.size(); i++)
 		cols[i] = Color(double(i) / 6.0, fmod(double(i) * 39.478378, 1.0), 0.0);
@@ -67,7 +67,7 @@ void MainWindow::SphereImplicitExample()
   Mesh implicitMesh;
   implicit.Polygonize(31, implicitMesh, Box(2.0));
 
-  QVector<Color> cols;
+  std::vector<Color> cols;
   cols.resize(implicitMesh.Vertexes());
   for (int i = 0; i < cols.size(); i++)
     cols[i] = Color(0.8, 0.8, 0.8);

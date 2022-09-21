@@ -77,17 +77,20 @@ inline Triangle::Triangle(const Vector& a, const Vector& b, const Vector& c)
   p[2] = c;
 }
 
+
+const class QString;
+
 class Mesh
 {
 protected:
-  QVector<Vector> vertices; //!< Vertices.
-  QVector<Vector> normals;  //!< Normals.
-  QVector<int> varray;     //!< Vertex indexes.
-  QVector<int> narray;     //!< Normal indexes.
+  std::vector<Vector> vertices; //!< Vertices.
+  std::vector<Vector> normals;  //!< Normals.
+  std::vector<int> varray;     //!< Vertex indexes.
+  std::vector<int> narray;     //!< Normal indexes.
 public:
   explicit Mesh();
-  explicit Mesh(const QVector<Vector>&, const QVector<int>&);
-  explicit Mesh(const QVector<Vector>&, const QVector<Vector>&, const QVector<int>&, const QVector<int>&);
+  explicit Mesh(const std::vector<Vector>&, const std::vector<int>&);
+  explicit Mesh(const std::vector<Vector>&, const std::vector<Vector>&, const std::vector<int>&, const std::vector<int>&);
   ~Mesh();
 
   void Reserve(int, int, int, int);
@@ -101,8 +104,8 @@ public:
   int Triangles() const;
   int Vertexes() const;
 
-  QVector<int> VertexIndexes() const;
-  QVector<int> NormalIndexes() const;
+  std::vector<int> VertexIndexes() const;
+  std::vector<int> NormalIndexes() const;
 
   int VertexIndex(int, int) const;
   int NormalIndex(int, int) const;
@@ -130,7 +133,7 @@ protected:
 /*!
 \brief Return the set of vertex indexes.
 */
-inline QVector<int> Mesh::VertexIndexes() const
+inline std::vector<int> Mesh::VertexIndexes() const
 {
   return varray;
 }
@@ -138,7 +141,7 @@ inline QVector<int> Mesh::VertexIndexes() const
 /*!
 \brief Return the set of normal indexes.
 */
-inline QVector<int> Mesh::NormalIndexes() const
+inline std::vector<int> Mesh::NormalIndexes() const
 {
   return narray;
 }
@@ -200,7 +203,7 @@ inline Vector Mesh::Vertex(int t, int v) const
 */
 inline int Mesh::Vertexes() const
 {
-  return vertices.size();
+  return int(vertices.size());
 }
 
 /*!
@@ -218,7 +221,7 @@ inline Vector Mesh::Normal(int i) const
 */
 inline int Mesh::Triangles() const
 {
-  return varray.size() / 3;
+  return int(varray.size()) / 3;
 }
 
 /*!

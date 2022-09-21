@@ -2,8 +2,6 @@
 
 #pragma once
 
-#include <QtCore/QVector>
-
 #include <iostream>
 
 #include "mesh.h"

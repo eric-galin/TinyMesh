@@ -1,6 +1,8 @@
 #pragma once
 
 #include <math.h>
+#include <ostream>
+
 class Math
 {
 public:
@@ -79,8 +81,6 @@ inline constexpr double Math::RadianToDegree(double a)
 {
   return a * 180.0 / 3.14159265358979323846;
 }
-
-#include <QtCore/QString>
 
 // Class
 class Vector

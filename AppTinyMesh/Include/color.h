@@ -3,10 +3,6 @@
 #ifndef __Color__
 #define __Color__
 
-// Qt Color
-#include <QtGui/QColor>
-#include <QtCore/QVector>
-
 // Mathematics fundamentals
 #include "mathematics.h"
 
@@ -38,8 +34,6 @@ public:
 
   double& operator[] (int);
   double operator[] (int) const;
-
-  QColor GetQt() const;
 
   static const Color White; //!< White.
   static const Color Transparent; //!< Transparent.
@@ -192,21 +186,5 @@ inline Color operator/(const Color& c, double a)
 {
   return c * (1.0 / a);
 }
-
-/*!
-\brief Create a Qt color from a color.
-
-Example how to write a pixel with a given color in an image:
-\code
-QImage image;
-Color c;
-image.setPixel(i, j, c.GetQt().rgb());
-\endcode
-*/
-inline QColor Color::GetQt() const
-{
-  return QColor(int(255.0 * Math::Clamp(c[0])), int(255.0 * Math::Clamp(c[1])), int(255.0 * Math::Clamp(c[2])), int(255.0 * Math::Clamp(c[3])));
-}
-
 
 #endif

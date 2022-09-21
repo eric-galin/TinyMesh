@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'realtime.h'
 **
-** Created by: The Qt Meta Object Compiler version 68 (Qt 6.1.3)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.3.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -13,7 +13,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'realtime.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
-#error "This file was generated using the moc from 6.1.3. It"
+#error "This file was generated using the moc from 6.3.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -64,7 +64,7 @@ QT_MOC_LITERAL(264, 15) // "keyReleaseEvent"
 static const uint qt_meta_data_MeshWidget[] = {
 
  // content:
-       9,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
       13,   14, // methods
@@ -75,21 +75,21 @@ static const uint qt_meta_data_MeshWidget[] = {
        6,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   92,    2, 0x06,    0 /* Public */,
-       3,    1,   93,    2, 0x06,    1 /* Public */,
-       5,    1,   96,    2, 0x06,    3 /* Public */,
-       6,    0,   99,    2, 0x06,    5 /* Public */,
-       7,    1,  100,    2, 0x06,    6 /* Public */,
-       9,    1,  103,    2, 0x06,    8 /* Public */,
+       1,    0,   92,    2, 0x06,    1 /* Public */,
+       3,    1,   93,    2, 0x06,    2 /* Public */,
+       5,    1,   96,    2, 0x06,    4 /* Public */,
+       6,    0,   99,    2, 0x06,    6 /* Public */,
+       7,    1,  100,    2, 0x06,    7 /* Public */,
+       9,    1,  103,    2, 0x06,    9 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-      10,    1,  106,    2, 0x0a,   10 /* Public */,
-      11,    1,  109,    2, 0x0a,   12 /* Public */,
-      12,    1,  112,    2, 0x0a,   14 /* Public */,
-      13,    1,  115,    2, 0x0a,   16 /* Public */,
-      14,    1,  118,    2, 0x0a,   18 /* Public */,
-      16,    1,  121,    2, 0x0a,   20 /* Public */,
-      18,    1,  124,    2, 0x0a,   22 /* Public */,
+      10,    1,  106,    2, 0x0a,   11 /* Public */,
+      11,    1,  109,    2, 0x0a,   13 /* Public */,
+      12,    1,  112,    2, 0x0a,   15 /* Public */,
+      13,    1,  115,    2, 0x0a,   17 /* Public */,
+      14,    1,  118,    2, 0x0a,   19 /* Public */,
+      16,    1,  121,    2, 0x0a,   21 /* Public */,
+      18,    1,  124,    2, 0x0a,   23 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -118,18 +118,18 @@ void MeshWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         (void)_t;
         switch (_id) {
         case 0: _t->_signalUpdate(); break;
-        case 1: _t->_signalMouseMoveEdit((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
-        case 2: _t->_signalMouseMove((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
+        case 1: _t->_signalMouseMoveEdit((*reinterpret_cast< std::add_pointer_t<QMouseEvent*>>(_a[1]))); break;
+        case 2: _t->_signalMouseMove((*reinterpret_cast< std::add_pointer_t<QMouseEvent*>>(_a[1]))); break;
         case 3: _t->_signalMouseRelease(); break;
-        case 4: _t->_signalEditSceneLeft((*reinterpret_cast< const Ray(*)>(_a[1]))); break;
-        case 5: _t->_signalEditSceneRight((*reinterpret_cast< const Ray(*)>(_a[1]))); break;
-        case 6: _t->mousePressEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
-        case 7: _t->mouseReleaseEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
-        case 8: _t->mouseDoubleClickEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
-        case 9: _t->mouseMoveEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
-        case 10: _t->wheelEvent((*reinterpret_cast< QWheelEvent*(*)>(_a[1]))); break;
-        case 11: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
-        case 12: _t->keyReleaseEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
+        case 4: _t->_signalEditSceneLeft((*reinterpret_cast< std::add_pointer_t<Ray>>(_a[1]))); break;
+        case 5: _t->_signalEditSceneRight((*reinterpret_cast< std::add_pointer_t<Ray>>(_a[1]))); break;
+        case 6: _t->mousePressEvent((*reinterpret_cast< std::add_pointer_t<QMouseEvent*>>(_a[1]))); break;
+        case 7: _t->mouseReleaseEvent((*reinterpret_cast< std::add_pointer_t<QMouseEvent*>>(_a[1]))); break;
+        case 8: _t->mouseDoubleClickEvent((*reinterpret_cast< std::add_pointer_t<QMouseEvent*>>(_a[1]))); break;
+        case 9: _t->mouseMoveEvent((*reinterpret_cast< std::add_pointer_t<QMouseEvent*>>(_a[1]))); break;
+        case 10: _t->wheelEvent((*reinterpret_cast< std::add_pointer_t<QWheelEvent*>>(_a[1]))); break;
+        case 11: _t->keyPressEvent((*reinterpret_cast< std::add_pointer_t<QKeyEvent*>>(_a[1]))); break;
+        case 12: _t->keyReleaseEvent((*reinterpret_cast< std::add_pointer_t<QKeyEvent*>>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -186,7 +186,7 @@ const QMetaObject MeshWidget::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_MeshWidget_t
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Ray &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Ray &, std::false_type>
+, QtPrivate::TypeAndForceComplete<MeshWidget, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Ray &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Ray &, std::false_type>
 , QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QWheelEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QKeyEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QKeyEvent *, std::false_type>
 
 

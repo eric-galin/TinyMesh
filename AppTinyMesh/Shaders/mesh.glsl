@@ -1,5 +1,4 @@
 #version 430 core
-#extension GL_EXT_geometry_shader4 : enable
 
 #ifdef VERTEX_SHADER
 layout(location = 0) in vec3 vertex;
@@ -42,9 +41,9 @@ out float ratio;
 
 void main()
 {	
-	vec2 p0 = WIN_SCALE * gl_PositionIn[0].xy / gl_PositionIn[0].w;
-	vec2 p1 = WIN_SCALE * gl_PositionIn[1].xy / gl_PositionIn[1].w;
-	vec2 p2 = WIN_SCALE * gl_PositionIn[2].xy / gl_PositionIn[2].w;
+	vec2 p0 = WIN_SCALE * gl_in[0].gl_Position.xy / gl_in[0].gl_Position.w;
+	vec2 p1 = WIN_SCALE * gl_in[1].gl_Position.xy / gl_in[1].gl_Position.w;
+	vec2 p2 = WIN_SCALE * gl_in[2].gl_Position.xy / gl_in[2].gl_Position.w;
 
 	vec2 v0 = p2 - p1;
 	vec2 v1 = p2 - p0;
@@ -61,17 +60,17 @@ void main()
 	ratio = 8.0f * u / (ab * bc * ca);
 
 	dist = vec3(area / length(v0), 0, 0);
-	gl_Position = gl_PositionIn[0];
+	gl_Position = gl_in[0].gl_Position;
 	fragVertex = geomVertex[0]; fragNormal = geomNormal[0]; fragColor = geomColor[0];
 	EmitVertex();
 
 	dist = vec3(0, area / length(v1), 0);
-	gl_Position = gl_PositionIn[1];
+	gl_Position = gl_in[1].gl_Position;
 	fragVertex = geomVertex[1]; fragNormal = geomNormal[1]; fragColor = geomColor[1];
 	EmitVertex();
 
 	dist = vec3(0, 0, area / length(v2));
-	gl_Position = gl_PositionIn[2];
+	gl_Position = gl_in[2].gl_Position;
 	fragVertex = geomVertex[2]; fragNormal = geomNormal[2]; fragColor = geomColor[2];
 	EmitVertex();
 

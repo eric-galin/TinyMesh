@@ -9,8 +9,9 @@
 #include <QtGui/QMouseEvent>
 #include <QtOpenGLWidgets/QOpenGLWidget>
 #include <QtCore/qdatetime.h>
-
 #include <QtGui/QPainter>
+
+#include <fstream>
 
 /*!
 \brief Default constructor.
@@ -38,11 +39,11 @@ MeshWidget::MeshGL::MeshGL(const Mesh& mesh, const Vector& position) : MeshGL()
   bbox = mesh.GetBox();
 
   // Compute plain arrays of sorted vertices & normals
-  QVector<int> vertexIndexes = mesh.VertexIndexes();
-  QVector<int> normalIndexes = mesh.NormalIndexes();
+  std::vector<int> vertexIndexes = mesh.VertexIndexes();
+  std::vector<int> normalIndexes = mesh.NormalIndexes();
   assert(vertexIndexes.size() == normalIndexes.size());
 
-  int nbVertex = vertexIndexes.size();
+  int nbVertex = int(vertexIndexes.size());
   int singleBufferSize = nbVertex * 3;
   float* vertices = new float[singleBufferSize];
   float* normals = new float[singleBufferSize];
@@ -117,12 +118,12 @@ MeshWidget::MeshGL::MeshGL(const MeshColor& mesh, const Vector& fr) : MeshGL()
   bbox = mesh.GetBox();
 
   // Compute plain arrays of sorted vertices & normals
-  QVector<int> vertexIndexes = mesh.VertexIndexes();
-  QVector<int> normalIndexes = mesh.NormalIndexes();
-  QVector<int> colorIndexes = mesh.ColorIndexes();
+  std::vector<int> vertexIndexes = mesh.VertexIndexes();
+  std::vector<int> normalIndexes = mesh.NormalIndexes();
+  std::vector<int> colorIndexes = mesh.ColorIndexes();
   assert(vertexIndexes.size() == normalIndexes.size());
 
-  int nbVertex = vertexIndexes.size();
+  int nbVertex = int(vertexIndexes.size());
   int singleBufferSize = nbVertex * 3;
   float* vertices = new float[singleBufferSize];
   float* normals = new float[singleBufferSize];
@@ -285,16 +286,11 @@ void MeshWidget::initializeGL()
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-  // Disable vsync for proper performance measurements
- // QGLFormat fmt;
- // fmt.setSwapInterval(0);
- // QGLFormat::setDefaultFormat(fmt);
-
-#ifdef _WIN32
+  // Find the prefix path automatically (To adapt to Visual studio file architecture)
   QString pPath = ".";
-#elif __linux__
-  QString pPath = "./AppTinyMesh";
-#endif 
+  std::ifstream in((pPath + QString("/Shaders/mesh.glsl")).toLocal8Bit().data());
+  if (in.good() == false)
+      pPath = "..";
 
   // Shader/Camera/Profiler
   QString fullPath = pPath + QString("/Shaders/mesh.glsl");

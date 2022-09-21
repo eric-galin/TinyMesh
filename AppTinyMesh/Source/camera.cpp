@@ -306,7 +306,6 @@ double Camera::GetFar() const
   return farplane;
 }
 
-
 /*!
 \brief Set the near and far planes.
 \param n, f Near and far planes distance to th eye.
