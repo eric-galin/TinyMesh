@@ -78,7 +78,7 @@ inline Triangle::Triangle(const Vector& a, const Vector& b, const Vector& c)
 }
 
 
-const class QString;
+class QString;
 
 class Mesh
 {

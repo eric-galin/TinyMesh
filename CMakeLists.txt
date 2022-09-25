@@ -6,17 +6,22 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui OpenGL OpenGLWidgets)
+if (Qt6Widgets_FOUND)
+    if (Qt6Widgets_VERSION VERSION_LESS 6.3.0)
+        message(FATAL_ERROR "Minimum Qt version is 6.3.0")
+    endif()
+endif()
 qt_standard_project_setup()
 
 if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE Debug)
+    set(CMAKE_BUILD_TYPE Debug)
 endif()
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-	set(CMAKE_CXX_FLAGS_DEBUG "-g")
-	set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+    set(CMAKE_CXX_FLAGS_DEBUG "-g")
+    set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-	set(CMAKE_CXX_FLAGS_RELEASE "-Ox")
+    set(CMAKE_CXX_FLAGS_RELEASE "-Ox")
 endif()
 
 # Add dependencies
@@ -51,21 +56,36 @@ add_executable(${APP} WIN32
 )
 set_target_properties(${APP} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR})
 
-# find glew library
-find_library(GLEW_LIB
-    NAMES glew32
-    HINTS "./Libs/"
-)
-target_link_libraries(${APP}
-    ${GLEW_LIB}
-    glu32.lib
-    opengl32
-    Qt6::Core
-    Qt6::Widgets
-    Qt6::Gui
-    Qt6::OpenGL
-    Qt6::OpenGLWidgets
-)
+# window target exe
+if (WIN32)
+    find_library(GLEW_LIBRARIES
+        NAMES glew32
+        HINTS "./Libs/"
+    )
+    target_link_libraries(${APP}
+        ${GLEW_LIBRARIES}
+        glu32.lib
+        opengl32
+        Qt6::Core
+        Qt6::Widgets
+        Qt6::Gui
+        Qt6::OpenGL
+        Qt6::OpenGLWidgets
+    )
+# linux target exe
+else()
+    find_package(GLEW REQUIRED)
+    target_link_libraries(${APP}
+        ${GLEW_LIBRARIES}
+        GLU
+        glut
+        Qt6::Core
+        Qt6::Widgets
+        Qt6::Gui
+        Qt6::OpenGL
+        Qt6::OpenGLWidgets
+    )
+endif()
 
 # shader folder copy on post build (all platforms)
 set(DATA_DIR AppTinyMesh/Shaders)

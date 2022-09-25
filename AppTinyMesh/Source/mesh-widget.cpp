@@ -271,9 +271,8 @@ void MeshWidget::initializeGL()
   GLenum err = glewInit();
   if (err != GLEW_OK)
   {
-    std::cout << "Error : " << glewGetErrorString(err) << std::endl;
-    std::cin.get();
-    exit(-1);
+    std::cout << "GLEW Error : " << glewGetErrorString(err) << std::endl;
+    std::cout << "Still resuming application" << std::endl;
   }
   std::cout << "Using GL_VERSION: " << glGetString(GL_VERSION) << std::endl;
 
