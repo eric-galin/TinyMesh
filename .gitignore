@@ -1,8 +1,6 @@
 .vs
-.obj
-.vcxproj
-.vcxproj.filters
-.vcxproj.user
+*.obj
 Libs
 Out
 Temp
+/AppTinyMesh/Source/realtime-moc.cpp

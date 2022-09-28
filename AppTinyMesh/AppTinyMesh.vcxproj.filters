@@ -41,6 +41,9 @@
     <ClCompile Include="Source\implicits.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\cylinder.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Include\qte.h">
@@ -102,6 +105,9 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Include\implicits.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\cylinder.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>

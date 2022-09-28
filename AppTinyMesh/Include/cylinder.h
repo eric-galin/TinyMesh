@@ -41,8 +41,6 @@ public:
 
 public:
 	static const double epsilon; //!< Internal \htmlonly\epsilon;\endhtmlonly for ray intersection tests.
-	static const int edge[18]; //!< Edge vertices.
-	static const Vector normal[5]; //!< Face normals.
 };
 
 //! Returns either end vertex of the cylinder.
