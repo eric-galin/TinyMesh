@@ -1,0 +1,8 @@
+.vs
+.obj
+.vcxproj
+.vcxproj.filters
+.vcxproj.user
+Libs
+Out
+Temp

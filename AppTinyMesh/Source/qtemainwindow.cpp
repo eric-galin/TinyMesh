@@ -29,6 +29,7 @@ void MainWindow::CreateActions()
 	// Buttons
 	connect(uiw.boxMesh, SIGNAL(clicked()), this, SLOT(BoxMeshExample()));
 	connect(uiw.sphereImplicit, SIGNAL(clicked()), this, SLOT(SphereImplicitExample()));
+	connect(uiw.cylinderMesh, SIGNAL(clicked()), this, SLOT(CylinderMeshExample()));
 	connect(uiw.resetcameraButton, SIGNAL(clicked()), this, SLOT(ResetCamera()));
 	connect(uiw.wireframe, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
 	connect(uiw.radioShadingButton_1, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
@@ -57,6 +58,19 @@ void MainWindow::BoxMeshExample()
 		cols[i] = Color(double(i) / 6.0, fmod(double(i) * 39.478378, 1.0), 0.0);
 
 	meshColor = MeshColor(boxMesh, cols, boxMesh.VertexIndexes());
+	UpdateGeometry();
+}
+
+void MainWindow::CylinderMeshExample()
+{
+	Mesh cylinderMesh = Mesh(Cylinder(Vector(0, 0, 0), Vector(1, 0, 1), 1), 32);
+
+	std::vector<Color> cols;
+	cols.resize(cylinderMesh.Vertexes());
+	for (int i = 0; i < cols.size(); i++)
+		cols[i] = Color(double(i) / 6.0, fmod(double(i) * 39.478378, 1.0), 0.0);
+
+	meshColor = MeshColor(cylinderMesh, cols, cylinderMesh.VertexIndexes());
 	UpdateGeometry();
 }
 
