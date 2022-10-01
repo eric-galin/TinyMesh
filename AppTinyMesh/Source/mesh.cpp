@@ -257,10 +257,13 @@ Mesh::Mesh(const Cylinder& cyl, const int nbDivision)
         AddTriangle(vertices.size() - 1, i + offset, ((i + 1) % nbDivision) + offset, normals.size() - 1);
 
     //Loop for the sides
-    /*offset = vertices.size();
     for (int i = 0; i < nbDivision; i++)
     {
-    }*/
+        Vector normal = Normalized(vertices[i] - z);
+        normals.push_back(normal);
+        AddTriangle(i, (i+1) % nbDivision, i+offset, normals.size() - 1);
+        AddTriangle(i + offset, ((i + 1) % nbDivision) + offset, (i + 1) % nbDivision, normals.size() - 1);
+    }
 }
 
 /*!
