@@ -58,11 +58,11 @@ inline Vector Cylinder::operator[] (int i) const
 }
 
 /*!
-\brief Returns the radius of the cylinder, i.e. the length of the half diagonal of the cylinder.
+\brief Returns the radius of the cylinder.
 */
 inline double Cylinder::Radius() const
 {
-	return 0.5 * r;
+	return r;
 }
 
 /*!

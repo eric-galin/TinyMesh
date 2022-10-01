@@ -205,7 +205,6 @@ Mesh::Mesh(const Box& box)
 
 /*!
 \brief Creates an axis aligned cylinder.
-.
 \param cyl the cylinder.
 \param nbDivision the number of divisions of the shape.
 */
@@ -214,9 +213,17 @@ Mesh::Mesh(const Cylinder& cyl, const int nbDivision)
     const Vector a = cyl.Vertex(0);
     const Vector b = cyl.Vertex(1);
     const double radius = cyl.Radius();
+    vertices.clear();
+    normals.clear();
+
+    // Orthonormal basis
+    const Vector z = Normalized(b - a);
+    Vector x, y;
+    z.Orthonormal(x, y);
+
 
     // Vertices
-    int vertexCount = (nbDivision * 2) + 2; //Each division neads 2 vertex + 2 for the circles centers
+    const int vertexCount = (nbDivision * 2) + 2; //Each division neads 2 vertex + 2 for the circles centers
     vertices.reserve(vertexCount); 
 
     // Circle slice size
@@ -225,35 +232,29 @@ Mesh::Mesh(const Cylinder& cyl, const int nbDivision)
     // Top circle
     for (int i = 0; i < nbDivision; i++)
     {
-        const double posX = cos(theta * i) * radius;
-        const double posY = sin(theta * i) * radius;
-        Vector va(posX, posY, 0.0);
-        va = va + a;
+        Vector va(x * cos(theta * i) + y * sin(theta * i) + a);
+        va *= radius;
         vertices.push_back(va);
     }
 
     vertices.push_back(a);
-    const Vector normalTop = Normalized(a - b);
-    normals.push_back(normalTop);
+    normals.push_back(-z);
     for (int i = 0; i < nbDivision; i++)
-        AddTriangle(nbDivision, i, (i + 1) % nbDivision, 0);
+        AddTriangle(vertices.size() - 1, i, (i + 1) % nbDivision, normals.size() - 1);
 
     // Bottom circle
     int offset = vertices.size();
     for (int i = 0; i < nbDivision; i++)
     {
-        const double posX = cos(theta * i) * radius;
-        const double posY = sin(theta * i) * radius;
-        Vector vb(posX, posY, 0.0);
-        vb = vb + b;
+        Vector vb(x * cos(theta * i) + y * sin(theta * i) + b);
+        vb *= radius;
         vertices.push_back(vb);
     }
 
     vertices.push_back(b);
-    const Vector normalBottom = Normalized(b - a);
-    normals.push_back(normalBottom);
+    normals.push_back(z);
     for (int i = 0; i < nbDivision; i++)
-        AddTriangle(nbDivision + offset, i + offset, ((i + 1) % nbDivision) + offset, 1);
+        AddTriangle(vertices.size() - 1, i + offset, ((i + 1) % nbDivision) + offset, normals.size() - 1);
 
     //Loop for the sides
     /*offset = vertices.size();

@@ -63,7 +63,7 @@ void MainWindow::BoxMeshExample()
 
 void MainWindow::CylinderMeshExample()
 {
-	Mesh cylinderMesh = Mesh(Cylinder(Vector(0, 0, 0), Vector(1, 0, 1), 1), 32);
+	Mesh cylinderMesh = Mesh(Cylinder(Vector(0.0, 0.0, 0.0), Vector(1.0, 1.0, 0.0), 1), 32);
 
 	std::vector<Color> cols;
 	cols.resize(cylinderMesh.Vertexes());
