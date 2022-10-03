@@ -1,12 +1,12 @@
 #ifndef __Qte__
 #define __Qte__
 
-#include <QMainWindow>
+#include <QtWidgets/qmainwindow.h>
 #include "realtime.h"
 #include "meshcolor.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class Assets; }
+	namespace Ui { class Assets; }
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
