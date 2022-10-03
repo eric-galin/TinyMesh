@@ -1,17 +1,18 @@
 #include "qte.h"
 #include "implicits.h"
+#include "ui_interface.h"
 
-MainWindow::MainWindow()
+MainWindow::MainWindow() : QMainWindow(), uiw(new Ui::Assets)
 {
 	// Chargement de l'interface
-	uiw.setupUi(this);
+    uiw->setupUi(this);
 
 	// Chargement du GLWidget
 	meshWidget = new MeshWidget;
 	QGridLayout* GLlayout = new QGridLayout;
 	GLlayout->addWidget(meshWidget, 0, 0);
 	GLlayout->setContentsMargins(0, 0, 0, 0);
-	uiw.widget_GL->setLayout(GLlayout);
+    uiw->widget_GL->setLayout(GLlayout);
 
 	// Creation des connect
 	CreateActions();
@@ -27,12 +28,12 @@ MainWindow::~MainWindow()
 void MainWindow::CreateActions()
 {
 	// Buttons
-	connect(uiw.boxMesh, SIGNAL(clicked()), this, SLOT(BoxMeshExample()));
-	connect(uiw.sphereImplicit, SIGNAL(clicked()), this, SLOT(SphereImplicitExample()));
-	connect(uiw.resetcameraButton, SIGNAL(clicked()), this, SLOT(ResetCamera()));
-	connect(uiw.wireframe, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
-	connect(uiw.radioShadingButton_1, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
-	connect(uiw.radioShadingButton_2, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
+    connect(uiw->boxMesh, SIGNAL(clicked()), this, SLOT(BoxMeshExample()));
+    connect(uiw->sphereImplicit, SIGNAL(clicked()), this, SLOT(SphereImplicitExample()));
+    connect(uiw->resetcameraButton, SIGNAL(clicked()), this, SLOT(ResetCamera()));
+    connect(uiw->wireframe, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
+    connect(uiw->radioShadingButton_1, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
+    connect(uiw->radioShadingButton_2, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
 
 	// Widget edition
 	connect(meshWidget, SIGNAL(_signalEditSceneLeft(const Ray&)), this, SLOT(editingSceneLeft(const Ray&)));
@@ -82,17 +83,17 @@ void MainWindow::UpdateGeometry()
 	meshWidget->ClearAll();
 	meshWidget->AddMesh("BoxMesh", meshColor);
 
-	uiw.lineEdit->setText(QString::number(meshColor.Vertexes()));
-	uiw.lineEdit_2->setText(QString::number(meshColor.Triangles()));
+    uiw->lineEdit->setText(QString::number(meshColor.Vertexes()));
+    uiw->lineEdit_2->setText(QString::number(meshColor.Triangles()));
 
 	UpdateMaterial();
 }
 
 void MainWindow::UpdateMaterial()
 {
-	meshWidget->UseWireframeGlobal(uiw.wireframe->isChecked());
+    meshWidget->UseWireframeGlobal(uiw->wireframe->isChecked());
 
-	if (uiw.radioShadingButton_1->isChecked())
+    if (uiw->radioShadingButton_1->isChecked())
 		meshWidget->SetMaterialGlobal(MeshMaterial::Normal);
 	else
 		meshWidget->SetMaterialGlobal(MeshMaterial::Color);

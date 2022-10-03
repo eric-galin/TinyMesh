@@ -1,17 +1,21 @@
 #ifndef __Qte__
 #define __Qte__
 
-#include "ui-interface.h"
+#include <QMainWindow>
 #include "realtime.h"
 #include "meshcolor.h"
+
+QT_BEGIN_NAMESPACE
+namespace Ui { class Assets; }
+QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
   Q_OBJECT
 private:
-  Ui::Assets uiw;				//!< Interface
+  Ui::Assets* uiw;           //!< Interface
 
-  MeshWidget* meshWidget;		//!< Viewer
+  MeshWidget* meshWidget;   //!< Viewer
   MeshColor meshColor;		//!< Mesh.
 
 public:
