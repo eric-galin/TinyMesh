@@ -1,4 +1,4 @@
-#version 430 core
+#version 150
 
 #ifdef VERTEX_SHADER
 void main(void)
@@ -14,13 +14,10 @@ void main(void)
 #endif
 
 #ifdef FRAGMENT_SHADER
-layout (depth_greater) out float gl_FragDepth;
-
-layout(location = 0) uniform vec3 CamPos;
-layout(location = 1) uniform vec3 CamLookAt;
-layout(location = 2) uniform vec3 CamUp;
-layout(location = 3) uniform vec2 iResolution;
-
+uniform vec3 CamPos;
+uniform vec3 CamLookAt;
+uniform vec3 CamUp;
+uniform vec2 iResolution;
 
 out vec4 color;
 
@@ -60,7 +57,5 @@ void main(void)
 	vec3 rd = BuildRd();
 
 	color = vec4(SkyShadeBlue(rd),1.0);
-
-	gl_FragDepth = 1.0;
 }
 #endif

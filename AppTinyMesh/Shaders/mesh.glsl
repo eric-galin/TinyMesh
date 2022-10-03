@@ -1,9 +1,9 @@
-#version 430 core
+#version 150
 
 #ifdef VERTEX_SHADER
-layout(location = 0) in vec3 vertex;
-layout(location = 1) in vec3 normal;
-layout(location = 2) in vec3 color;
+in vec3 vertex;
+in vec3 normal;
+in vec3 color;
 
 uniform mat4 ModelViewMatrix;
 uniform mat4 ProjectionMatrix;

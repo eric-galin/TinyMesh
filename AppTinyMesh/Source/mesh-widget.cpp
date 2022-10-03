@@ -285,14 +285,21 @@ void MeshWidget::initializeGL()
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-  // Find the prefix path automatically (To adapt to Visual studio file architecture)
-  QString pPath = ".";
-  std::ifstream in((pPath + QString("/Shaders/mesh.glsl")).toLocal8Bit().data());
-  if (in.good() == false)
-      pPath = "..";
+  // Find path of shader files (depends on IDE: QtCreator or Visual Studio...)
+  QString shaderPath;
+  QVector<QString> possiblePaths = { "./MyTinyMesh/AppTinyMesh/Shaders/", "./AppTinyMesh/Shaders/", "./Shaders/" };
+  for (auto& path : possiblePaths)
+  {
+        std::ifstream in((path + QString("mesh.glsl")).toLocal8Bit().data());
+        if (in.good())
+        {
+            shaderPath = path;
+            break;
+        }
+  }
 
   // Shader/Camera/Profiler
-  QString fullPath = pPath + QString("/Shaders/mesh.glsl");
+  QString fullPath = shaderPath + QString("mesh.glsl");
   QByteArray ba = fullPath.toLocal8Bit();
   mainShaderProgram = read_program(ba.data());
   camera = Camera(Vector(-10.0), Vector(0.0));
@@ -300,7 +307,7 @@ void MeshWidget::initializeGL()
   profiler.Init();
 
   // Sky
-  fullPath = pPath + QString("/Shaders/skybox.glsl");
+  fullPath = shaderPath + QString("skybox.glsl");
   ba = fullPath.toLocal8Bit();
   skyboxShader = read_program(ba.data());
   glGenVertexArrays(1, &skyboxVAO);
@@ -355,10 +362,10 @@ void MeshWidget::paintGL()
   glDepthFunc(GL_LEQUAL);
   glUseProgram(skyboxShader);
   glBindVertexArray(skyboxVAO);
-  glUniform3f(0, camera.Eye()[0], camera.Eye()[1], camera.Eye()[2]);
-  glUniform3f(1, camera.At()[0], camera.At()[1], camera.At()[2]);
-  glUniform3f(2, camera.Up()[0], camera.Up()[1], camera.Up()[2]);
-  glUniform2f(3, width(), height());
+  glUniform3f(glGetUniformLocation(skyboxShader, "CamPos"), camera.Eye()[0], camera.Eye()[1], camera.Eye()[2]);
+  glUniform3f(glGetUniformLocation(skyboxShader, "CamAt"), camera.At()[0], camera.At()[1], camera.At()[2]);
+  glUniform3f(glGetUniformLocation(skyboxShader, "CamUp"), camera.Up()[0], camera.Up()[1], camera.Up()[2]);
+  glUniform2f(glGetUniformLocation(skyboxShader, "iResolution"), width(), height());
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
   // Draw meshes
