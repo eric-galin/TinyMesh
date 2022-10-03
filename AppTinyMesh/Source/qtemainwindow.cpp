@@ -54,7 +54,7 @@ void MainWindow::BoxMeshExample()
 
 	std::vector<Color> cols;
 	cols.resize(boxMesh.Vertexes());
-	for (int i = 0; i < cols.size(); i++)
+    for (size_t i = 0; i < cols.size(); i++)
 		cols[i] = Color(double(i) / 6.0, fmod(double(i) * 39.478378, 1.0), 0.0);
 
 	meshColor = MeshColor(boxMesh, cols, boxMesh.VertexIndexes());
@@ -70,12 +70,11 @@ void MainWindow::SphereImplicitExample()
 
   std::vector<Color> cols;
   cols.resize(implicitMesh.Vertexes());
-  for (int i = 0; i < cols.size(); i++)
+  for (size_t i = 0; i < cols.size(); i++)
     cols[i] = Color(0.8, 0.8, 0.8);
 
   meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
   UpdateGeometry();
-
 }
 
 void MainWindow::UpdateGeometry()
