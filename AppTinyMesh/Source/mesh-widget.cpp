@@ -766,25 +766,25 @@ void MeshWidget::mouseMoveEvent(QMouseEvent* e)
 {
     int x, y;
     _InternalGetMouseGlobalPosition(e, x, y);
-    if ((e->modifiers() & Qt::AltModifier))
+    if ((e->modifiers() & Qt::ControlModifier))
     {
         // Displacement mode
         double MoveScale = Norm(camera.View()) * 0.015 * 0.05;
         if (e->buttons() & Qt::LeftButton)
         {
-            // Alt + Left Mouse Move    : Rotation
+            // Ctrl + Left Mouse Move    : Rotation
             camera.LeftRightRound((x0 - x) * 0.01);
             camera.UpDownRound((y0 - y) * 0.005);
         }
         else if (e->buttons() & Qt::RightButton)
         {
-            // Alt + Right Mouse Move   : Forward and Backward
+            // Ctrl + Right Mouse Move   : Forward and Backward
             camera.BackForth((y - y0) * MoveScale);
             QApplication::setOverrideCursor(QCursor(Qt::SplitVCursor));
         }
         else if (e->buttons() & Qt::MiddleButton)
         {
-            // Alt + Left Mouse Move    : Plan displacement
+            // Ctrl + Left Mouse Move    : Plan displacement
             camera.LeftRightHorizontal((x - x0) * MoveScale);
             camera.UpDownVertical((y - y0) * MoveScale);
             QApplication::setOverrideCursor(QCursor(Qt::SizeAllCursor));
@@ -794,7 +794,7 @@ void MeshWidget::mouseMoveEvent(QMouseEvent* e)
 
         emit _signalMouseMove(e);
     }
-    if (e->modifiers() & Qt::ControlModifier)
+    if (e->modifiers() & Qt::ShiftModifier)
     {
         emit _signalMouseMoveEdit(e);
 
@@ -808,29 +808,27 @@ void MeshWidget::mouseMoveEvent(QMouseEvent* e)
 */
 void MeshWidget::wheelEvent(QWheelEvent* e)
 {
-    if (!(e->modifiers() & Qt::ControlModifier) && !(e->modifiers() & Qt::ShiftModifier))
+    double MoveScale = Norm(camera.View()) * 0.025;
+    if (e->angleDelta().y() > 0)
     {
-        double MoveScale = Norm(camera.View()) * 0.025;
-        if (e->angleDelta().y() > 0)
-        {
-            cameraOrthoSize -= MoveScale;
-            camera.BackForth(MoveScale);
-        }
-        else
-        {
-            cameraOrthoSize += MoveScale;
-            camera.BackForth(-MoveScale);
-        }
-
-        // Apply changes to projection matrix if we are in orthographic mode
-        if (!perspectiveProjection)
-        {
-            makeCurrent();
-            glMatrixMode(GL_PROJECTION);
-            glLoadIdentity();
-            glOrtho(-cameraOrthoSize, cameraOrthoSize, -cameraOrthoSize, cameraOrthoSize, camera.GetNear(), camera.GetFar());
-        }
+        cameraOrthoSize -= MoveScale;
+        camera.BackForth(MoveScale);
     }
+    else
+    {
+        cameraOrthoSize += MoveScale;
+        camera.BackForth(-MoveScale);
+    }
+
+    // Apply changes to projection matrix if we are in orthographic mode
+    if (!perspectiveProjection)
+    {
+        makeCurrent();
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(-cameraOrthoSize, cameraOrthoSize, -cameraOrthoSize, cameraOrthoSize, camera.GetNear(), camera.GetFar());
+    }
+
     update();
 }
 
@@ -847,8 +845,8 @@ void MeshWidget::keyPressEvent(QKeyEvent* e)
         SaveScreen();
         break;
     case Qt::Key_S:
-        // Alt + S: Statistics
-        if (e->modifiers() & Qt::AltModifier)
+        // Ctrl + S: Statistics
+        if (e->modifiers() & Qt::ControlModifier)
             profiler.enabled = !profiler.enabled;
         break;
     default:
