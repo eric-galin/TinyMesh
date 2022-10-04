@@ -284,12 +284,18 @@ void MeshWidget::initializeGL()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
+    // If you have any problem with rendering, switch to these two lines.
+    //const QString usedMeshShader = "mesh_basic.glsl";
+   // const QString usedSkyShader = "skybox_basic.glsl";
+    const QString usedMeshShader = "mesh.glsl";
+    const QString usedSkyShader = "skybox.glsl";
+
     // Find path of shader files (depends on IDE: QtCreator or Visual Studio...)
     QString shaderPath;
     QVector<QString> possiblePaths = { "./MyTinyMesh/AppTinyMesh/Shaders/", "./AppTinyMesh/Shaders/", "./Shaders/" };
     for (auto& path : possiblePaths)
     {
-        std::ifstream in((path + QString("mesh.glsl")).toLocal8Bit().data());
+        std::ifstream in((path + usedMeshShader).toLocal8Bit().data());
         if (in.good())
         {
             shaderPath = path;
@@ -298,7 +304,7 @@ void MeshWidget::initializeGL()
     }
 
     // Shader/Camera/Profiler
-    QString fullPath = shaderPath + QString("mesh.glsl");
+    QString fullPath = shaderPath + usedMeshShader;
     QByteArray ba = fullPath.toLocal8Bit();
     mainShaderProgram = read_program(ba.data());
     camera = Camera(Vector(-10.0), Vector(0.0));
@@ -306,7 +312,7 @@ void MeshWidget::initializeGL()
     profiler.Init();
 
     // Sky
-    fullPath = shaderPath + QString("skybox.glsl");
+    fullPath = shaderPath + usedSkyShader;
     ba = fullPath.toLocal8Bit();
     skyboxShader = read_program(ba.data());
     glGenVertexArrays(1, &skyboxVAO);
