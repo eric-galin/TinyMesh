@@ -1,0 +1,6 @@
+.vs
+*.obj
+Libs
+Out
+Temp
+/AppTinyMesh/Source/realtime-moc.cpp
