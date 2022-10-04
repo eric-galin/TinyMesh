@@ -12,8 +12,17 @@
     #include "GL/glew.h"
 #endif
 
+// QGlobal is needed to check the Qt version
+#include <QtCore/qglobal.h>
+
+// QOpenGLWidget location depends on Qt version (differs between Qt6 & Qt5)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    #include <QtWidgets/QOpenGLWidget>
+#else
+    #include <QtOpenGLWidgets/QOpenGLWidget>
+#endif
+
 #include <string>
-#include <QtOpenGLWidgets/QOpenGLWidget>
 
 // Shader API
 GLuint read_program(const char *filename, const char *definitions = "");
