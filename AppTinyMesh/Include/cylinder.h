@@ -1,4 +1,3 @@
-#pragma once
 // Cylinder
 
 #pragma once

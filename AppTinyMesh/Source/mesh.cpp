@@ -267,6 +267,193 @@ Mesh::Mesh(const Cylinder& cyl, const int nbDivision)
 }
 
 /*!
+\brief Creates a sphere.
+\param s the sphere.
+\param nSubdivision the number of divisions of the shape.
+*/
+Mesh::Mesh(const Sphere & S, int nSubdivision){
+    double phi = (1.0f + sqrt(5.0f)) * 0.5f;
+    double a = S.Radius();
+    double b = S.Radius() / phi;
+
+    Reserve(12, 12, 36, 36);
+
+    vertices.emplace_back(Vector(0, b, -a));
+    vertices.emplace_back(Vector(b, a, 0));
+    vertices.emplace_back(Vector(-b, a, 0));
+    vertices.emplace_back(Vector(0, b, a));
+    vertices.emplace_back(Vector(0, -b, a));
+    vertices.emplace_back(Vector(-a, 0, b));
+    vertices.emplace_back(Vector(0, -b, -a));
+    vertices.emplace_back(Vector(a, 0, -b));
+    vertices.emplace_back(Vector(a, 0, b));
+    vertices.emplace_back(Vector(-a, 0, -b));
+    vertices.emplace_back(Vector(b, -a, 0));
+    vertices.emplace_back(Vector(-b, -a, 0));
+
+    normals.push_back(Normalized(vertices[2]*vertices[1]*vertices[0]));
+    AddTriangle(2,  1,  0, 0);
+
+    normals.push_back(Normalized(vertices[1]*vertices[2]*vertices[3]));
+    AddTriangle(1, 2, 3, 1);
+
+    normals.push_back(Normalized(vertices[5]*vertices[4]*vertices[3]));
+    AddTriangle(5, 4, 3, 2);
+
+    normals.push_back(Normalized(vertices[4]*vertices[8]*vertices[3]));
+    AddTriangle(4,  8,  3, 3);
+
+    normals.push_back(Normalized(vertices[7]*vertices[6]*vertices[0]));
+    AddTriangle(7, 6, 0, 4);
+
+    normals.push_back(Normalized(vertices[6]*vertices[9]*vertices[0]));
+    AddTriangle(6,  9,  0, 5);
+
+    normals.push_back(Normalized(vertices[11]*vertices[10]*vertices[4]));
+    AddTriangle(11,  10,  4, 6);
+
+    normals.push_back(Normalized(vertices[10]*vertices[11]*vertices[6]));
+    AddTriangle(10,  11,  6, 7);
+
+    normals.push_back(Normalized(vertices[9]*vertices[5]*vertices[2]));
+    AddTriangle(9,5,2, 8);
+
+    normals.push_back(Normalized(vertices[5]*vertices[9]*vertices[11]));
+    AddTriangle(5,9,11, 9);
+
+    normals.push_back(Normalized(vertices[8]*vertices[7]*vertices[1]));
+    AddTriangle(8, 7, 1, 10);
+
+    normals.push_back(Normalized(vertices[7]*vertices[8]*vertices[10]));
+    AddTriangle(7, 8, 10, 11);
+
+    normals.push_back(Normalized(vertices[2]*vertices[5]*vertices[3]));
+    AddTriangle(2, 5, 3, 12);
+
+    normals.push_back(Normalized(vertices[8]*vertices[1]*vertices[3]));
+    AddTriangle(8, 1, 3, 13);
+
+    normals.push_back(Normalized(vertices[9]*vertices[2]*vertices[0]));
+    AddTriangle(9, 2, 0, 14);
+
+    normals.push_back(Normalized(vertices[1]*vertices[7]*vertices[0]));
+    AddTriangle(1, 7, 0, 15);
+
+    normals.push_back(Normalized(vertices[11]*vertices[9]*vertices[6]));
+    AddTriangle(11, 9, 6, 16);
+
+    normals.push_back(Normalized(vertices[7]*vertices[10]*vertices[6]));
+    AddTriangle(7, 10, 6, 17);
+
+    normals.push_back(Normalized(vertices[5]*vertices[11]*vertices[4]));
+    AddTriangle(5, 11, 4, 18);
+
+    normals.push_back(Normalized(vertices[10]*vertices[8]*vertices[4]));
+    AddTriangle(10, 8, 4, 19);
+
+    //TriangleSubdivision();
+}
+
+#include <algorithm>
+
+void Mesh::TriangleSubdivision(int n) {
+    if(n == 0){
+        return;
+    }
+
+
+    // 1. Each triangle is replaced by four smaller one
+    int nbTriangles = Triangles();
+    int nbVertexes = Vertexes();
+    int nbNormals  = normals.size();
+
+    for(int i=0; i< nbTriangles; i++){
+        Vector v0 = Vertex(i, 0);
+        Vector v1 = Vertex(i, 1);
+        Vector v2 = Vertex(i, 2);
+
+
+
+        // Add new vertices and normals
+
+        // - Between vertex 0 and 1
+        Vector v01( (v0[0]+v1[0])/2., (v0[1]+v1[1])/2., (v0[2]+v1[2])/2.);
+        vertices.push_back(v01);
+
+        // - Between vertex 1 and 2
+        Vector v12((v1[0]+v2[0])/2., (v1[1]+v2[1])/2., (v1[2]+v2[2])/2.);
+        vertices.push_back(v12);
+
+        // - Between vertex 2 and 0
+        Vector v20((v2[0]+v0[0])/2., (v2[1]+v0[1])/2., (v2[2]+v0[2])/2.);
+        vertices.push_back(v20);
+
+
+        normals.push_back(Normalized(v0*v01*v20));
+        normals.push_back(Normalized(v1*v12*v01));
+        normals.push_back(Normalized(v2*v20*v12));
+        normals.push_back(Normalized(v01*v12*v20));
+
+        // Add new triangles
+        // vertices : i*3 because for each triangle we add 3 vertices
+        // normals  : i*4 because for each triangle we add 4 normals
+        AddTriangle(VertexIndex(i, 0), nbVertexes + i*3    , nbVertexes + i*3 + 2, nbNormals + i*4);
+        AddTriangle(VertexIndex(i, 1), nbVertexes + i*3 + 1, nbVertexes + i*3    , nbNormals + i*4 + 1);
+        AddTriangle(VertexIndex(i, 2), nbVertexes + i*3 + 2, nbVertexes + i*3 + 1, nbNormals + i*4 + 2);
+        AddTriangle(nbVertexes + i*3      , nbVertexes + i*3 + 1, nbVertexes + i*3 + 2, nbNormals + i*4 + 3);
+
+    }
+
+    // Delete old triangles
+    varray.erase(varray.begin(), varray.begin()+(nbTriangles - 1)*3);
+    narray.erase(narray.begin(), narray.begin()+(nbTriangles - 1)*3);
+
+    // 2. Compute new vertex positions from old positions
+
+    // for each old vertices
+    for(int v=0; v<nbVertexes; v++){
+        std::vector<int> neighbors;
+
+        for(int t=0; t<Triangles(); t++){
+            for(int i=0; i<3; i++){
+                if(v== VertexIndex(t, i)){
+                    neighbors.push_back(VertexIndex(t, (i+1)%3));
+                    neighbors.push_back(VertexIndex(t, (i+2)%3));
+                }
+            }
+        }
+
+        std::sort(neighbors.begin(), neighbors.end());
+        neighbors.erase( std::unique(neighbors.begin(), neighbors.end()), neighbors.end());
+
+        int d = neighbors.size();
+
+        if(d>=3){
+            double alpha = 0.1875;
+
+            if(d!=3){
+                alpha = 3./(d*8.);
+            }
+
+            Vector sum(0., 0., 0.);
+
+            for(int i=0; i<d; i++){
+                sum += vertices[neighbors[i]];
+            }
+
+            vertices[v] = (1-alpha*d)*vertices[v] + alpha*sum;
+        }
+
+
+
+    }
+
+    TriangleSubdivision(n-1);
+}
+
+
+
+/*!
 \brief Scale the mesh.
 \param s Scaling factor.
 */

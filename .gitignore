@@ -4,3 +4,4 @@ Libs
 Out
 Temp
 /AppTinyMesh/Source/realtime-moc.cpp
+/AppTinyMesh/Source/moc_qte.cpp
