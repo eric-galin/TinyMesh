@@ -19,6 +19,8 @@ public:
 
     double Radius() const;
 
+    Vector Center() const;
+
     //! Empty.
     ~Sphere() {}
 };
